@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
 
 @Controller
 public class RuleController {
@@ -28,7 +27,7 @@ public class RuleController {
     }
 
     @PostMapping("/ruleName/validate")
-    public String validate(@Valid Rule ruleName, BindingResult result, Model model) {
+    public String validate( Rule ruleName, BindingResult result, Model model) {
         // TODO: check data valid and save to db, after saving return RuleName list
         return "ruleName/add";
     }
@@ -40,7 +39,7 @@ public class RuleController {
     }
 
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid Rule ruleName,
+    public String updateRuleName(@PathVariable("id") Integer id,  Rule ruleName,
                              BindingResult result, Model model) {
         // TODO: check required fields, if valid call service to update RuleName and return RuleName list
         return "redirect:/ruleName/list";
