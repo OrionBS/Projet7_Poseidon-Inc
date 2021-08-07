@@ -3,7 +3,7 @@
 
 Il s’agit d’un logiciel d’entreprise déployé sur le Web qui vise à générer davantage de transactions pour les investisseurs institutionnels qui achètent et vendent des titres à revenu fixe.
 
-#### Lien Github : https://github.com/OrionBS/Projet6_PayMyBuddy
+#### Lien Github : https://github.com/OrionBS/Projet7_Poseidon-Inc
 
 ## Pour commencer
 
@@ -17,13 +17,18 @@ Il s’agit d’un logiciel d’entreprise déployé sur le Web qui vise à gén
 - NPM
 - Angular
 
-### Installation
+### Téléchargement
 
 ```
 cd /"dossier de téléchargement"/
 git clone https://github.com/OrionBS/Projet7_Poseidon-Inc
 cd /Projet7_Poseidon-Inc
 ```
+
+### Installation
+
+Pensez à intaller les dernières versions de Java, MySQL, Maven, NodeJS, NPM et Angular
+
 ### Paramétrage MySQL
 
 Créez 2 variables d'environnement :
@@ -53,12 +58,6 @@ flush privileges;
 ```
 java -jar PayMyBuddyApp.jar
 ```
-
-## Diagramme UML
-![UML_Diagram](src/main/resources/static/img/UML_diagram.png "Diagramme UML")
-
-## Le Modèle Physique de Données
-![MPD_Diagram](src/main/resources/static/img/MPD.png "Diagramme MPD")
 
 ## Web
 
