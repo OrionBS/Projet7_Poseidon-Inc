@@ -18,34 +18,59 @@ public class BidService {
     @Autowired
     BidRepository bidRepository;
 
-    public void addBid(BidDTO bidDTO) {
+    public boolean creatingBid(BidDTO bidDTO) {
 
-        log.info("Bid's Creation, {}", bidDTO);
-        Bid bid = bidDTO.bidDtoToBid(bidDTO);
+        if (bidDTO == null) {
+            log.info("Bid's empty");
+            return false;
+        }
 
-    }
-
-    public BidDTO getOneBid(Integer index) {
-
-        log.info("Fetch Bid Id {}", index);
-        Bid bid = bidRepository.getById(index);
-        return new BidDTO().bidToBidDto(bid);
-
-    }
-
-    public void updateBid(BidDTO bidDTO) {
-
-        log.info("Update Bid, {}", bidDTO);
+        log.info("Creating Bid, {}", bidDTO);
         Bid bid = bidDTO.bidDtoToBid(bidDTO);
         bidRepository.save(bid);
-
+        return true;
     }
 
-    public List<BidDTO> getAllBids() {
+    public BidDTO readingBid(Integer index) {
 
-        log.info("Fetch All Bids");
+        log.info("Reading Bid Id {}", index);
+        Bid bid = bidRepository.getById(index);
+        return new BidDTO().bidToBidDto(bid);
+    }
+
+    public List<BidDTO> readingAllBid() {
+
+        log.info("Reading All Bids");
         BidDTO bidDTO = BidDTO.builder().build();
         return bidDTO.bidToBidDtoList(bidRepository.findAll());
+    }
 
+    public boolean updatingBid(BidDTO bidDTO) {
+
+        if (bidDTO == null) {
+            log.info("Bid's empty");
+            return false;
+        }
+
+        if (bidRepository.findById(bidDTO.getId()) == null) {
+            log.info("Bid doesn't exist");
+            return false;
+        }
+
+        Bid bid = bidDTO.bidDtoToBid(bidDTO);
+        log.info("Updating Bid, {}", bidDTO);
+        bidRepository.save(bid);
+        return true;
+    }
+
+    public boolean deletingBid(Integer index) {
+
+        if (bidRepository.findById(index) == null) {
+            log.info("Bid doesn't exist");
+            return false;
+        }
+        bidRepository.deleteById(index);
+        log.info("Deleting Bid {}", index);
+        return true;
     }
 }

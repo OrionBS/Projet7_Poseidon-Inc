@@ -1,54 +1,52 @@
 package fr.orionbs.controllers;
 
-import fr.orionbs.models.Bid;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import fr.orionbs.dataTransferObjects.BidDTO;
+import fr.orionbs.services.BidService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
-
-@Controller
+@RestController
 public class BidController {
-    // TODO: Inject Bid service
 
-    @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
-        // TODO: call service find all bids to show to the view
-        return "bidList/list";
+    @Autowired
+    BidService bidService;
+
+    @PostMapping(path = "/bid/creating")
+    public boolean creatingBid(BidDTO bidDTO) {
+        boolean answer = bidService.creatingBid(bidDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @GetMapping("/bidList/add")
-    public String addBidForm(Bid bid) {
-        return "bidList/add";
+    @GetMapping(path = "/bid/reading")
+    public BidDTO readingBid(Integer index) {
+        return bidService.readingBid(index);
     }
 
-    @PostMapping("/bidList/validate")
-    public String validate( Bid bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-        return "bidList/add";
+    @GetMapping(path = "/bid/readingAll")
+    public List<BidDTO> readingAllBid() {
+        return bidService.readingAllBid();
     }
 
-    @GetMapping("/bidList/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
-        return "bidList/update";
+    @PutMapping(path = "/bid/updating")
+    public boolean updatingBid(BidDTO bidDTO) {
+        boolean answer = bidService.updatingBid(bidDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id,  Bid bidList,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
-        return "redirect:/bidList/list";
-    }
-
-    @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
-        return "redirect:/bidList/list";
+    @DeleteMapping(path = "/bid/deleting")
+    public boolean deletingBid(Integer index) {
+        boolean answer = bidService.deletingBid(index);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 }

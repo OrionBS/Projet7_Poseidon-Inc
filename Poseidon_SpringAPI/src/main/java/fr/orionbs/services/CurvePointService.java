@@ -18,34 +18,63 @@ public class CurvePointService {
     @Autowired
     CurvePointRepository curvePointRepository;
 
-    public void addCurvePoint(CurvePointDTO curvePointDTO) {
+    public boolean creatingCurvePoint(CurvePointDTO curvePointDTO) {
 
-        log.info("CurvePoint's Creation, {}", curvePointDTO);
+        if (curvePointDTO == null) {
+            log.info("CurvePoint is empty");
+            return false;
+        }
+
+        log.info("Creating CurvePoint, {}", curvePointDTO);
         CurvePoint curvePoint = curvePointDTO.curvePointDtoToCurvePoint(curvePointDTO);
-
+        curvePointRepository.save(curvePoint);
+        return true;
     }
 
-    public CurvePointDTO getOneCurvePoint(Integer index) {
+    public CurvePointDTO readingCurvePoint(Integer index) {
 
-        log.info("Fetch CurvePoint Id {}", index);
+        log.info("Reading CurvePoint Id {}", index);
         CurvePoint curvePoint = curvePointRepository.getById(index);
         return new CurvePointDTO().curvePointToCurvePointDto(curvePoint);
 
     }
 
-    public void updateCurvePoint(CurvePointDTO curvePointDTO) {
+    public List<CurvePointDTO> readingAllCurvePoint() {
 
-        log.info("Update CurvePoint, {}", curvePointDTO);
-        CurvePoint curvePoint = curvePointDTO.curvePointDtoToCurvePoint(curvePointDTO);
-        curvePointRepository.save(curvePoint);
+        log.info("Reading All CurvePoints");
+        CurvePointDTO curvePointDTO = CurvePointDTO.builder().build();
+        return curvePointDTO.curvePointToCurvePointDtoList(curvePointRepository.findAll());
 
     }
 
-    public List<CurvePointDTO> getAllCurvePoints() {
+    public boolean updatingCurvePoint(CurvePointDTO curvePointDTO) {
 
-        log.info("Fetch All CurvePoints");
-        CurvePointDTO curvePointDTO = CurvePointDTO.builder().build();
-        return curvePointDTO.curvePointToCurvePointDtoList(curvePointRepository.findAll());
+        if (curvePointDTO == null) {
+            log.info("CurvePoint is empty");
+            return false;
+        }
+
+        if (curvePointRepository.findById(curvePointDTO.getId()) == null) {
+            log.info("CurvePoint doesn't exist");
+            return false;
+        }
+
+        CurvePoint curvePoint = curvePointDTO.curvePointDtoToCurvePoint(curvePointDTO);
+        log.info("Updating CurvePoint, {}", curvePointDTO);
+        curvePointRepository.save(curvePoint);
+        return true;
+
+    }
+
+    public boolean deletingCurvePoint(Integer index) {
+
+        if (curvePointRepository.findById(index) == null) {
+            log.info("CurvePoint doesn't exist");
+            return false;
+        }
+        curvePointRepository.deleteById(index);
+        log.info("Deleting CurvePoint {}", index);
+        return true;
 
     }
 }
