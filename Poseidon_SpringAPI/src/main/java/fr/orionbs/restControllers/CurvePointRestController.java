@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.dataTransferObjects.CurvePointDTO;
 import fr.orionbs.services.CurvePointService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-public class CurvePointController {
+public class CurvePointRestController {
 
     @Autowired
     CurvePointService curvePointService;
@@ -23,7 +23,7 @@ public class CurvePointController {
         return false;
     }
 
-    @GetMapping(path = "/bid/reading")
+    @GetMapping(path = "/curvePoint/reading")
     public CurvePointDTO readingCurvePoint(Integer index) {
         return curvePointService.readingCurvePoint(index);
     }

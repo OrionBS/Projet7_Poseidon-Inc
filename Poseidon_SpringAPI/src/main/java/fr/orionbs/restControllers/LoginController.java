@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

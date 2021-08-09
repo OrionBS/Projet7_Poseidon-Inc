@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.dataTransferObjects.TradeDTO;
 import fr.orionbs.services.TradeService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-public class TradeController {
+public class TradeRestController {
 
     @Autowired
     TradeService tradeService;

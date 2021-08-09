@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.dataTransferObjects.UserDTO;
 import fr.orionbs.services.UserService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-public class UserController {
+public class UserRestController {
 
     @Autowired
     UserService userService;

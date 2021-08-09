@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.dataTransferObjects.RuleDTO;
 import fr.orionbs.services.RuleService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-public class RuleController {
+public class RuleRestController {
 
     @Autowired
     RuleService ruleService;

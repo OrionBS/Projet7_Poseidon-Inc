@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.dataTransferObjects.BidDTO;
 import fr.orionbs.services.BidService;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class BidController {
+public class BidRestController {
 
     @Autowired
     BidService bidService;

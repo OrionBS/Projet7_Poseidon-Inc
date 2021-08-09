@@ -1,4 +1,4 @@
-package fr.orionbs.controllers;
+package fr.orionbs.restControllers;
 
 import fr.orionbs.dataTransferObjects.RatingDTO;
 import fr.orionbs.services.RatingService;
@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-public class RatingController {
+public class RatingRestController {
 
     @Autowired
     RatingService ratingService;
