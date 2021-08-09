@@ -1,53 +1,53 @@
 package fr.orionbs.controllers;
 
-import fr.orionbs.models.Rule;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import fr.orionbs.dataTransferObjects.RuleDTO;
+import fr.orionbs.services.RuleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
-@Controller
+@RestController
 public class RuleController {
-    // TODO: Inject RuleName service
 
-    @RequestMapping("/ruleName/list")
-    public String home(Model model)
-    {
-        // TODO: find all RuleName, add to model
-        return "ruleName/list";
+    @Autowired
+    RuleService ruleService;
+
+    @PostMapping(path = "/rule/creating")
+    public boolean creatingRule(RuleDTO ruleDTO) {
+        boolean answer = ruleService.creatingRule(ruleDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @GetMapping("/ruleName/add")
-    public String addRuleForm(Rule bid) {
-        return "ruleName/add";
+    @GetMapping(path = "/rule/reading")
+    public RuleDTO readingRule(Integer index) {
+        return ruleService.readingRule(index);
     }
 
-    @PostMapping("/ruleName/validate")
-    public String validate( Rule ruleName, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return RuleName list
-        return "ruleName/add";
+    @GetMapping(path = "/rule/readingAll")
+    public List<RuleDTO> readingAllRule() {
+        return ruleService.readingAllRule();
     }
 
-    @GetMapping("/ruleName/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
-        return "ruleName/update";
+    @PutMapping(path = "/rule/updating")
+    public boolean updatingRule(RuleDTO ruleDTO) {
+        boolean answer = ruleService.updatingRule(ruleDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id,  Rule ruleName,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-        return "redirect:/ruleName/list";
-    }
-
-    @GetMapping("/ruleName/delete/{id}")
-    public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
-        return "redirect:/ruleName/list";
+    @DeleteMapping(path = "/rule/deleting")
+    public boolean deletingRule(Integer index) {
+        boolean answer = ruleService.deletingRule(index);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 }

@@ -1,53 +1,53 @@
 package fr.orionbs.controllers;
 
-import fr.orionbs.models.Trade;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import fr.orionbs.dataTransferObjects.TradeDTO;
+import fr.orionbs.services.TradeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
-@Controller
+@RestController
 public class TradeController {
-    // TODO: Inject Trade service
 
-    @RequestMapping("/trade/list")
-    public String home(Model model)
-    {
-        // TODO: find all Trade, add to model
-        return "trade/list";
+    @Autowired
+    TradeService tradeService;
+
+    @PostMapping(path = "/trade/creating")
+    public boolean creatingTrade(TradeDTO tradeDTO) {
+        boolean answer = tradeService.creatingTrade(tradeDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
-        return "trade/add";
+    @GetMapping(path = "/trade/reading")
+    public TradeDTO readingTrade(Integer index) {
+        return tradeService.readingTrade(index);
     }
 
-    @PostMapping("/trade/validate")
-    public String validate( Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
-        return "trade/add";
+    @GetMapping(path = "/trade/readingAll")
+    public List<TradeDTO> readingAllTrade() {
+        return tradeService.readingAllTrade();
     }
 
-    @GetMapping("/trade/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
-        return "trade/update";
+    @PutMapping(path = "/trade/updating")
+    public boolean updatingTrade(TradeDTO tradeDTO) {
+        boolean answer = tradeService.updatingTrade(tradeDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id,  Trade trade,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
-        return "redirect:/trade/list";
-    }
-
-    @GetMapping("/trade/delete/{id}")
-    public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
-        return "redirect:/trade/list";
+    @DeleteMapping(path = "/trade/deleting")
+    public boolean deletingTrade(Integer index) {
+        boolean answer = tradeService.deletingTrade(index);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 }

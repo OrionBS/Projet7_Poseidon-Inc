@@ -1,53 +1,53 @@
 package fr.orionbs.controllers;
 
-import fr.orionbs.models.Rating;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import fr.orionbs.dataTransferObjects.RatingDTO;
+import fr.orionbs.services.RatingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
-@Controller
+@RestController
 public class RatingController {
-    // TODO: Inject Rating service
 
-    @RequestMapping("/rating/list")
-    public String home(Model model)
-    {
-        // TODO: find all Rating, add to model
-        return "rating/list";
+    @Autowired
+    RatingService ratingService;
+
+    @PostMapping(path = "/rating/creating")
+    public boolean creatingRating(RatingDTO ratingDTO) {
+        boolean answer = ratingService.creatingRating(ratingDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @GetMapping("/rating/add")
-    public String addRatingForm(Rating rating) {
-        return "rating/add";
+    @GetMapping(path = "/rating/reading")
+    public RatingDTO readingRating(Integer index) {
+        return ratingService.readingRating(index);
     }
 
-    @PostMapping("/rating/validate")
-    public String validate( Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
-        return "rating/add";
+    @GetMapping(path = "/rating/readingAll")
+    public List<RatingDTO> readingAllRating() {
+        return ratingService.readingAllRating();
     }
 
-    @GetMapping("/rating/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Rating by Id and to model then show to the form
-        return "rating/update";
+    @PutMapping(path = "/rating/updating")
+    public boolean updatingRating(RatingDTO ratingDTO) {
+        boolean answer = ratingService.updatingRating(ratingDTO);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 
-    @PostMapping("/rating/update/{id}")
-    public String updateRating(@PathVariable("id") Integer id,  Rating rating,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
-        return "redirect:/rating/list";
-    }
-
-    @GetMapping("/rating/delete/{id}")
-    public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
-        return "redirect:/rating/list";
+    @DeleteMapping(path = "/rating/deleting")
+    public boolean deletingRating(Integer index) {
+        boolean answer = ratingService.deletingRating(index);
+        if (answer) {
+            return true;
+        }
+        return false;
     }
 }

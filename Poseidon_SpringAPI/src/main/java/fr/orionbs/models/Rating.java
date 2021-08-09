@@ -16,7 +16,7 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
     private String moodysRating;
-    private String sandpRating;
+    private String sAndPRating;
     private String fitchRating;
     private Integer orderNumber;
 }

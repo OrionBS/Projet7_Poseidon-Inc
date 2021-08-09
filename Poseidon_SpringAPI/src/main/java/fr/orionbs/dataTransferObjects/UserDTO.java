@@ -14,7 +14,7 @@ import java.util.List;
 @ToString
 public class UserDTO {
     private Integer id;
-    private String username;
+    private String userName;
     private String fullName;
     private String role;
 
@@ -23,7 +23,7 @@ public class UserDTO {
     }
 
     public User userDtoToUser(UserDTO userDTO) {
-        return User.builder().id(userDTO.getId()).username(userDTO.getUsername()).fullName(userDTO.getFullName()).role(userDTO.getRole()).build();
+        return User.builder().id(userDTO.getId()).username(userDTO.getUserName()).fullName(userDTO.getFullName()).role(userDTO.getRole()).build();
     }
 
     public List<UserDTO> userToUserDTOList(List<User> userList) {
@@ -38,7 +38,7 @@ public class UserDTO {
     public List<User> userDtoToUserList(List<UserDTO> userDTOList) {
         List<User> userList = new ArrayList<>();
         for (UserDTO userDTO : userDTOList) {
-            User user = User.builder().id(userDTO.getId()).username(userDTO.getUsername()).fullName(userDTO.getFullName()).role(userDTO.getRole()).build();
+            User user = User.builder().id(userDTO.getId()).username(userDTO.getUserName()).fullName(userDTO.getFullName()).role(userDTO.getRole()).build();
             userList.add(user);
         }
         return userList;
