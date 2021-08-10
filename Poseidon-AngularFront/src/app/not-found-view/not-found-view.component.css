@@ -1,0 +1,29 @@
+section {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+section img {
+    height: 15rem;
+    width: 15rem;
+}
+section a {
+    background-color: black;
+    border-radius: 0.7rem;
+    border: 3px solid black;
+    padding: 0.5rem 2rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 900;
+    text-decoration: none;
+}
+section a:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+

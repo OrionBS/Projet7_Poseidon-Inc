@@ -1,0 +1,52 @@
+menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+menu div.leftMenu{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+menu div.leftMenu img {
+    height: 2.5rem;
+    width: auto;
+}
+menu div.leftMenu a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+menu div.leftMenu a:hover {
+    text-decoration: underline;
+}
+menu div.rightMenu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+menu div.rightMenu p {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+menu div.rightMenu a {
+    background-color: black;
+    border-radius: 0.7rem;
+    border: 3px solid black;
+    padding: 0.4rem;
+    color: white;
+    font-size: 1rem;
+    font-weight: 900;
+    text-decoration: none;
+}
+menu div.rightMenu a:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+.activeA {
+    text-decoration: underline !important;
+}
