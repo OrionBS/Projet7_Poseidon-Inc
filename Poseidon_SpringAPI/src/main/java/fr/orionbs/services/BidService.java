@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dataTransferObjects.BidDTO;
+import fr.orionbs.dto.BidDTO;
 import fr.orionbs.models.Bid;
 import fr.orionbs.repositories.BidRepository;
 import lombok.extern.slf4j.Slf4j;

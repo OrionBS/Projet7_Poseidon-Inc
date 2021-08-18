@@ -1,13 +1,18 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dataTransferObjects.UserDTO;
+import fr.orionbs.dto.CredentialsDTO;
+import fr.orionbs.dto.UserDTO;
 import fr.orionbs.models.User;
 import fr.orionbs.repositories.UserRepository;
+import fr.orionbs.security.JwtResponse;
+import fr.orionbs.security.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -16,7 +21,12 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public boolean creatingUser(UserDTO userDTO) {
 
@@ -76,5 +86,29 @@ public class UserService {
         log.info("Deleting User {}", index);
         return true;
 
+    }
+
+    public JwtResponse register(CredentialsDTO registrationDTO) {
+
+        User user = new User();
+
+        if (registrationDTO.getUsername() == null) {
+            log.error("Username null.");
+            return null;
+            //TODO throw exception;
+        }
+        user.setUsername(registrationDTO.getUsername());
+        if (registrationDTO.getPassword() == null) {
+            log.error("Password null.");
+            return null;
+            //TODO throw exception;
+
+        }
+        user.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
+
+        log.info("Registration User {}", user);
+        final User save = userRepository.save(user);
+        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(save.getUsername(), save.getPassword(), Collections.emptyList());
+        return new JwtResponse(jwtTokenUtil.generateToken(userDetails));
     }
 }

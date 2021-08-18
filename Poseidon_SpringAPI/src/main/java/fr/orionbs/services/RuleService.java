@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dataTransferObjects.RuleDTO;
+import fr.orionbs.dto.RuleDTO;
 import fr.orionbs.models.Rule;
 import fr.orionbs.repositories.RuleRepository;
 import lombok.extern.slf4j.Slf4j;

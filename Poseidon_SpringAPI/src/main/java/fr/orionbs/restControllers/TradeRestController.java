@@ -1,53 +1,71 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dataTransferObjects.TradeDTO;
+import fr.orionbs.dto.TradeDTO;
 import fr.orionbs.services.TradeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@RequestMapping(path = "/api/trade")
 public class TradeRestController {
 
     @Autowired
     TradeService tradeService;
 
-    @PostMapping(path = "/trade/creating")
-    public boolean creatingTrade(TradeDTO tradeDTO) {
+    @PostMapping
+    public ResponseEntity<Boolean> creatingTrade(@RequestBody TradeDTO tradeDTO) {
+
         boolean answer = tradeService.creatingTrade(tradeDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/trade/reading")
-    public TradeDTO readingTrade(Integer index) {
-        return tradeService.readingTrade(index);
+    @GetMapping(path = "/{index}")
+    public ResponseEntity<TradeDTO> readingTrade(@PathVariable(value = "index") Integer index) {
+
+        TradeDTO tradeDTO = tradeService.readingTrade(index);
+
+        if (tradeDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(tradeDTO, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/trade/readingAll")
-    public List<TradeDTO> readingAllTrade() {
-        return tradeService.readingAllTrade();
+    @GetMapping
+    public ResponseEntity<List<TradeDTO>> readingAllTrade() {
+
+        List<TradeDTO> tradeDTOList = tradeService.readingAllTrade();
+
+        return new ResponseEntity<>(tradeDTOList, HttpStatus.OK);
     }
 
-    @PutMapping(path = "/trade/updating")
-    public boolean updatingTrade(TradeDTO tradeDTO) {
+    @PutMapping
+    public ResponseEntity<Boolean> updatingTrade(@RequestBody TradeDTO tradeDTO) {
+
         boolean answer = tradeService.updatingTrade(tradeDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(path = "/trade/deleting")
-    public boolean deletingTrade(Integer index) {
+    @DeleteMapping
+    public ResponseEntity<Boolean> deletingTrade(@RequestParam(value = "index") Integer index) {
+
         boolean answer = tradeService.deletingTrade(index);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 }

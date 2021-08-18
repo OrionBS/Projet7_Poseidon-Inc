@@ -1,54 +1,72 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dataTransferObjects.CurvePointDTO;
+import fr.orionbs.dto.CurvePointDTO;
 import fr.orionbs.services.CurvePointService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@RequestMapping("/api/curve-point")
 public class CurvePointRestController {
 
     @Autowired
     CurvePointService curvePointService;
 
-    @PostMapping(path = "/curvePoint/creating")
-    public boolean creatingCurvePoint(CurvePointDTO curvePointDTO) {
+    @PostMapping
+    public ResponseEntity<Boolean> creatingCurvePoint(@RequestBody CurvePointDTO curvePointDTO) {
+
         boolean answer = curvePointService.creatingCurvePoint(curvePointDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/curvePoint/reading")
-    public CurvePointDTO readingCurvePoint(Integer index) {
-        return curvePointService.readingCurvePoint(index);
+    @GetMapping(path = "/{index}")
+    public ResponseEntity<CurvePointDTO> readingCurvePoint(@PathVariable(value = "index") Integer index) {
+
+        CurvePointDTO curvePointDTO = curvePointService.readingCurvePoint(index);
+
+        if (curvePointDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(curvePointDTO, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/curvePoint/readingAll")
-    public List<CurvePointDTO> readingAllCurvePoint() {
-        return curvePointService.readingAllCurvePoint();
+    @GetMapping()
+    public ResponseEntity<List<CurvePointDTO>> readingAllCurvePoint() {
+
+        List<CurvePointDTO> curvePointDTOList = curvePointService.readingAllCurvePoint();
+
+        return new ResponseEntity<>(curvePointDTOList, HttpStatus.OK);
     }
 
-    @PutMapping(path = "/curvePoint/updating")
-    public boolean updatingCurvePoint(CurvePointDTO curvePointDTO) {
+    @PutMapping()
+    public ResponseEntity<Boolean> updatingCurvePoint(@RequestBody CurvePointDTO curvePointDTO) {
+
         boolean answer = curvePointService.updatingCurvePoint(curvePointDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(path = "/curvePoint/deleting")
-    public boolean deletingCurvePoint(Integer index) {
+    @DeleteMapping()
+    public ResponseEntity<Boolean> deletingCurvePoint(@RequestParam(value = "index") Integer index) {
+
         boolean answer = curvePointService.deletingCurvePoint(index);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
 }

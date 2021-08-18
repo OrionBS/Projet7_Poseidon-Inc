@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dataTransferObjects.RatingDTO;
+import fr.orionbs.dto.RatingDTO;
 import fr.orionbs.models.Rating;
 import fr.orionbs.repositories.RatingRepository;
 import lombok.extern.slf4j.Slf4j;

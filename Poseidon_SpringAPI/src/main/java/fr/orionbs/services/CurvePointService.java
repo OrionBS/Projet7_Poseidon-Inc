@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dataTransferObjects.CurvePointDTO;
+import fr.orionbs.dto.CurvePointDTO;
 import fr.orionbs.models.CurvePoint;
 import fr.orionbs.repositories.CurvePointRepository;
 import lombok.extern.slf4j.Slf4j;

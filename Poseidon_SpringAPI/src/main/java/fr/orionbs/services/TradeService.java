@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dataTransferObjects.TradeDTO;
+import fr.orionbs.dto.TradeDTO;
 import fr.orionbs.models.Trade;
 import fr.orionbs.repositories.TradeRepository;
 import lombok.extern.slf4j.Slf4j;

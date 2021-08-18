@@ -1,53 +1,71 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dataTransferObjects.RatingDTO;
+import fr.orionbs.dto.RatingDTO;
 import fr.orionbs.services.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
+@RequestMapping(path = "/api/rating")
 public class RatingRestController {
 
     @Autowired
     RatingService ratingService;
 
-    @PostMapping(path = "/rating/creating")
-    public boolean creatingRating(RatingDTO ratingDTO) {
+    @PostMapping
+    public ResponseEntity<Boolean> creatingRating(@RequestBody RatingDTO ratingDTO) {
+
         boolean answer = ratingService.creatingRating(ratingDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/rating/reading")
-    public RatingDTO readingRating(Integer index) {
-        return ratingService.readingRating(index);
+    @GetMapping(path = "/{index}")
+    public ResponseEntity<RatingDTO> readingRating(@PathVariable(value = "index") Integer index) {
+
+        RatingDTO ratingDTO = ratingService.readingRating(index);
+
+        if (ratingDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(ratingDTO, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/rating/readingAll")
-    public List<RatingDTO> readingAllRating() {
-        return ratingService.readingAllRating();
+    @GetMapping
+    public ResponseEntity<List<RatingDTO>> readingAllRating() {
+
+        List<RatingDTO> ratingDTOList = ratingService.readingAllRating();
+
+        return new ResponseEntity<>(ratingDTOList, HttpStatus.OK);
     }
 
-    @PutMapping(path = "/rating/updating")
-    public boolean updatingRating(RatingDTO ratingDTO) {
+    @PutMapping
+    public ResponseEntity<Boolean> updatingRating(@RequestBody RatingDTO ratingDTO) {
+
         boolean answer = ratingService.updatingRating(ratingDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(path = "/rating/deleting")
-    public boolean deletingRating(Integer index) {
+    @DeleteMapping
+    public ResponseEntity<Boolean> deletingRating(@RequestParam(value = "index") Integer index) {
+
         boolean answer = ratingService.deletingRating(index);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 }

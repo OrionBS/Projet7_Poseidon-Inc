@@ -1,52 +1,72 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dataTransferObjects.BidDTO;
+import fr.orionbs.dto.BidDTO;
 import fr.orionbs.services.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
+@RequestMapping(path = "/api/bid")
 public class BidRestController {
 
     @Autowired
     BidService bidService;
 
-    @PostMapping(path = "/bid/creating")
-    public boolean creatingBid(BidDTO bidDTO) {
+    @PostMapping
+    public ResponseEntity<Boolean> creatingBid(@RequestBody BidDTO bidDTO) {
+
         boolean answer = bidService.creatingBid(bidDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/bid/reading")
-    public BidDTO readingBid(Integer index) {
-        return bidService.readingBid(index);
+    @GetMapping("/{index}")
+    public ResponseEntity<BidDTO> readingBid(@PathVariable(value = "index") Integer index) {
+
+        BidDTO bidDTO = bidService.readingBid(index);
+
+        if (bidDTO == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(bidDTO, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/bid/readingAll")
-    public List<BidDTO> readingAllBid() {
-        return bidService.readingAllBid();
+    @GetMapping
+    public ResponseEntity<List<BidDTO>> readingAllBid() {
+
+        List<BidDTO> bidDTOList = bidService.readingAllBid();
+
+        return new ResponseEntity<>(bidDTOList, HttpStatus.OK);
     }
 
-    @PutMapping(path = "/bid/updating")
-    public boolean updatingBid(BidDTO bidDTO) {
+    @PutMapping
+    public ResponseEntity<Boolean> updatingBid(@RequestBody BidDTO bidDTO) {
+
         boolean answer = bidService.updatingBid(bidDTO);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 
-    @DeleteMapping(path = "/bid/deleting")
-    public boolean deletingBid(Integer index) {
+    @DeleteMapping
+    public ResponseEntity<Boolean> deletingBid(@RequestParam(value = "index") Integer index) {
+
         boolean answer = bidService.deletingBid(index);
+
         if (answer) {
-            return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
         }
-        return false;
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 }
