@@ -1,9 +1,7 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dto.UserDTO;
+import fr.orionbs.dtos.UserDTO;
 import fr.orionbs.services.UserService;
-import fr.orionbs.services.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +13,11 @@ import java.util.List;
 @RequestMapping(path = "/api/user")
 public class UserRestController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
+
+    public UserRestController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping
     public ResponseEntity<Boolean> creatingUser(@RequestBody UserDTO userDTO) {

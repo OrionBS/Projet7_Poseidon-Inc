@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dto.TradeDTO;
+import fr.orionbs.dtos.TradeDTO;
 
 import java.util.List;
 

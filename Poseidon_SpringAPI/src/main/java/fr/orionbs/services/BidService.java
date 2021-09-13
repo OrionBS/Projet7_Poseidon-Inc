@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dto.BidDTO;
+import fr.orionbs.dtos.BidDTO;
 
 import java.util.List;
 

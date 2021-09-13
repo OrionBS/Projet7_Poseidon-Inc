@@ -1,11 +1,11 @@
 package fr.orionbs.services.impl;
 
-import fr.orionbs.dto.BidDTO;
+import fr.orionbs.dtos.BidDTO;
 import fr.orionbs.models.Bid;
 import fr.orionbs.repositories.BidRepository;
 import fr.orionbs.services.BidService;
+import fr.orionbs.services.MapperService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,9 +17,11 @@ import java.util.List;
 public class BidServiceImpl implements BidService {
 
     private BidRepository bidRepository;
+    private MapperService mapperService;
 
-    public BidServiceImpl(BidRepository bidRepository) {
+    public BidServiceImpl(BidRepository bidRepository,MapperService mapperService) {
         this.bidRepository = bidRepository;
+        this.mapperService = mapperService;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class BidServiceImpl implements BidService {
         }
 
         log.info("Creating Bid, {}", bidDTO);
-        Bid bid = bidDTO.bidDtoToBid(bidDTO);
+        Bid bid = mapperService.bidDtoToBid(bidDTO);
         bidRepository.save(bid);
         return true;
     }
@@ -39,14 +41,13 @@ public class BidServiceImpl implements BidService {
     public BidDTO readingBid(Integer index) {
         log.info("Reading Bid Id {}", index);
         Bid bid = bidRepository.getById(index);
-        return new BidDTO().bidToBidDto(bid);
+        return mapperService.bidToBidDto(bid);
     }
 
     @Override
     public List<BidDTO> readingAllBid() {
         log.info("Reading All Bids");
-        BidDTO bidDTO = BidDTO.builder().build();
-        return bidDTO.bidToBidDtoList(bidRepository.findAll());
+        return mapperService.bidToBidDtoList(bidRepository.findAll());
     }
 
     @Override
@@ -61,7 +62,7 @@ public class BidServiceImpl implements BidService {
             return false;
         }
 
-        Bid bid = bidDTO.bidDtoToBid(bidDTO);
+        Bid bid = mapperService.bidDtoToBid(bidDTO);
         log.info("Updating Bid, {}", bidDTO);
         bidRepository.save(bid);
         return true;

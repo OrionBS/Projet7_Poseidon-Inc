@@ -1,9 +1,7 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dto.RatingDTO;
+import fr.orionbs.dtos.RatingDTO;
 import fr.orionbs.services.RatingService;
-import fr.orionbs.services.impl.RatingServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +13,11 @@ import java.util.List;
 @RequestMapping(path = "/api/rating")
 public class RatingRestController {
 
-    @Autowired
-    RatingService ratingService;
+    private final RatingService ratingService;
+
+    public RatingRestController(RatingService ratingService) {
+        this.ratingService = ratingService;
+    }
 
     @PostMapping
     public ResponseEntity<Boolean> creatingRating(@RequestBody RatingDTO ratingDTO) {

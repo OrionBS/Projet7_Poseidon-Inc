@@ -1,8 +1,9 @@
 package fr.orionbs.services.impl;
 
-import fr.orionbs.dto.RuleDTO;
+import fr.orionbs.dtos.RuleDTO;
 import fr.orionbs.models.Rule;
 import fr.orionbs.repositories.RuleRepository;
+import fr.orionbs.services.MapperService;
 import fr.orionbs.services.RuleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import java.util.List;
 @Transactional
 public class RuleServiceImpl implements RuleService {
 
-    private RuleRepository ruleRepository;
+    private final RuleRepository ruleRepository;
+    private final MapperService mapperService;
 
-    public RuleServiceImpl(RuleRepository ruleRepository) {
+    public RuleServiceImpl(RuleRepository ruleRepository, MapperService mapperService) {
         this.ruleRepository = ruleRepository;
+        this.mapperService = mapperService;
     }
 
     @Override
@@ -29,8 +32,7 @@ public class RuleServiceImpl implements RuleService {
         }
 
         log.info("Creating Rule, {}", ruleDTO);
-        Rule rule = ruleDTO.ruleDtoToRule(ruleDTO);
-        ruleRepository.save(rule);
+        ruleRepository.save(mapperService.ruleDtoToRule(ruleDTO));
         return true;
     }
 
@@ -38,14 +40,13 @@ public class RuleServiceImpl implements RuleService {
     public RuleDTO readingRule(Integer index) {
         log.info("Reading Rule Id {}", index);
         Rule rule = ruleRepository.getById(index);
-        return new RuleDTO().ruleToRuleDTO(rule);
+        return mapperService.ruleToRuleDTO(rule);
     }
 
     @Override
     public List<RuleDTO> readingAllRule() {
         log.info("Reading All Rules");
-        RuleDTO ruleDTO = RuleDTO.builder().build();
-        return ruleDTO.ruleToRuleDTOList(ruleRepository.findAll());
+        return mapperService.ruleToRuleDTOList(ruleRepository.findAll());
     }
 
     @Override
@@ -60,7 +61,7 @@ public class RuleServiceImpl implements RuleService {
             return false;
         }
 
-        Rule rule = ruleDTO.ruleDtoToRule(ruleDTO);
+        Rule rule = mapperService.ruleDtoToRule(ruleDTO);
         log.info("Updating Rule, {}", ruleDTO);
         ruleRepository.save(rule);
         return true;

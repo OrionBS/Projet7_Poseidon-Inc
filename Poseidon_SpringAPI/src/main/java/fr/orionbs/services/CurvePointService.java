@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dto.CurvePointDTO;
+import fr.orionbs.dtos.CurvePointDTO;
 
 import java.util.List;
 

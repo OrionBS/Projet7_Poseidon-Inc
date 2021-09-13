@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dto.RatingDTO;
+import fr.orionbs.dtos.RatingDTO;
 
 import java.util.List;
 

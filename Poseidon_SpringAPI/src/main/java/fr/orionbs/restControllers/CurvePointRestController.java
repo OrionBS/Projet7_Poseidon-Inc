@@ -1,9 +1,7 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dto.CurvePointDTO;
+import fr.orionbs.dtos.CurvePointDTO;
 import fr.orionbs.services.CurvePointService;
-import fr.orionbs.services.impl.CurvePointServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +13,11 @@ import java.util.List;
 @RequestMapping("/api/curve-point")
 public class CurvePointRestController {
 
-    @Autowired
-    CurvePointService curvePointService;
+    private final CurvePointService curvePointService;
+
+    public CurvePointRestController(CurvePointService curvePointService) {
+        this.curvePointService = curvePointService;
+    }
 
     @PostMapping
     public ResponseEntity<Boolean> creatingCurvePoint(@RequestBody CurvePointDTO curvePointDTO) {

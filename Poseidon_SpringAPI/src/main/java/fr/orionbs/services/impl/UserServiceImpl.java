@@ -1,13 +1,15 @@
 package fr.orionbs.services.impl;
 
-import fr.orionbs.dto.CredentialsDTO;
-import fr.orionbs.dto.TokenDTO;
-import fr.orionbs.dto.UserDTO;
+import fr.orionbs.dtos.CredentialsDTO;
+import fr.orionbs.dtos.TokenDTO;
+import fr.orionbs.dtos.UserDTO;
 import fr.orionbs.models.User;
 import fr.orionbs.repositories.UserRepository;
 import fr.orionbs.security.JwtTokenUtil;
+import fr.orionbs.services.MapperService;
 import fr.orionbs.services.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,14 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final UserRepository userRepository;
+    private final MapperService mapperService;
 
-    private UserRepository userRepository;
-
-    public UserServiceImpl(JwtTokenUtil jwtTokenUtil, UserRepository userRepository) {
+    public UserServiceImpl(JwtTokenUtil jwtTokenUtil, UserRepository userRepository, MapperService mapperService) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.userRepository = userRepository;
+        this.mapperService = mapperService;
     }
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -39,8 +42,7 @@ public class UserServiceImpl implements UserService {
         }
 
         log.info("Creating User, {}", userDTO);
-        User user = userDTO.userDtoToUser(userDTO);
-        userRepository.save(user);
+        userRepository.save(mapperService.userDtoToUser(userDTO));
         return true;
     }
 
@@ -48,14 +50,13 @@ public class UserServiceImpl implements UserService {
     public UserDTO readingUser(Integer index) {
         log.info("Reading User Id {}", index);
         User user = userRepository.getById(index);
-        return new UserDTO().userToUserDTO(user);
+        return mapperService.userToUserDTO(user);
     }
 
     @Override
     public List<UserDTO> readingAllUser() {
         log.info("Reading All Users");
-        UserDTO userDTO = UserDTO.builder().build();
-        return userDTO.userToUserDTOList(userRepository.findAll());
+        return mapperService.userToUserDTOList(userRepository.findAll());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        User user = userDTO.userDtoToUser(userDTO);
+        User user = mapperService.userDtoToUser(userDTO);
         log.info("Updating User, {}", userDTO);
         userRepository.save(user);
         return true;

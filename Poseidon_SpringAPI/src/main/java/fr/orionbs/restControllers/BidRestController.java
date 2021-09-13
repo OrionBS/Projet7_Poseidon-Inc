@@ -1,9 +1,7 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dto.BidDTO;
+import fr.orionbs.dtos.BidDTO;
 import fr.orionbs.services.BidService;
-import fr.orionbs.services.impl.BidServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +13,11 @@ import java.util.List;
 @RequestMapping(path = "/api/bid")
 public class BidRestController {
 
-    @Autowired
-    BidService bidService;
+    private final BidService bidService;
+
+    public BidRestController(BidService bidService) {
+        this.bidService = bidService;
+    }
 
     @PostMapping
     public ResponseEntity<Boolean> creatingBid(@RequestBody BidDTO bidDTO) {

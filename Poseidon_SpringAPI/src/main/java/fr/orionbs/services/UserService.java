@@ -1,8 +1,8 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dto.CredentialsDTO;
-import fr.orionbs.dto.TokenDTO;
-import fr.orionbs.dto.UserDTO;
+import fr.orionbs.dtos.CredentialsDTO;
+import fr.orionbs.dtos.TokenDTO;
+import fr.orionbs.dtos.UserDTO;
 
 import java.util.List;
 

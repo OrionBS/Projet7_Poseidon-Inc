@@ -1,8 +1,7 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dto.RuleDTO;
+import fr.orionbs.dtos.RuleDTO;
 import fr.orionbs.services.RuleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +13,11 @@ import java.util.List;
 @RequestMapping(path = "/api/rule")
 public class RuleRestController {
 
-    @Autowired
-    RuleService ruleService;
+    private final RuleService ruleService;
+
+    public RuleRestController(RuleService ruleService) {
+        this.ruleService = ruleService;
+    }
 
     @PostMapping
     public ResponseEntity<Boolean> creatingRule(@RequestBody RuleDTO ruleDTO) {

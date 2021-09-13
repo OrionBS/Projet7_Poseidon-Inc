@@ -1,6 +1,6 @@
 package fr.orionbs.services;
 
-import fr.orionbs.dto.RuleDTO;
+import fr.orionbs.dtos.RuleDTO;
 
 import java.util.List;
 

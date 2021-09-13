@@ -1,7 +1,8 @@
 package fr.orionbs.security;
 
-import fr.orionbs.dto.CredentialsDTO;
+import fr.orionbs.dtos.CredentialsDTO;
 import fr.orionbs.repositories.UserRepository;
+import fr.orionbs.services.MapperService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,15 +15,16 @@ import java.util.Collections;
 public class JwtUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final MapperService mapperService;
 
-    public JwtUserDetailsService(UserRepository repository) {
+    public JwtUserDetailsService(UserRepository repository, MapperService mapperService) {
         this.userRepository = repository;
+        this.mapperService = mapperService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CredentialsDTO credentialsDTO = new CredentialsDTO();
-        credentialsDTO.userToCredentialsDto(userRepository.findByUsername(username));
+        CredentialsDTO credentialsDTO = mapperService.userToCredentialsDto(userRepository.findByUsername(username));
 
         if (credentialsDTO != null) {
             return new User(credentialsDTO.getUsername(), credentialsDTO.getPassword(), Collections.emptyList());

@@ -1,11 +1,11 @@
 package fr.orionbs.services.impl;
 
-import fr.orionbs.dto.CurvePointDTO;
+import fr.orionbs.dtos.CurvePointDTO;
 import fr.orionbs.models.CurvePoint;
 import fr.orionbs.repositories.CurvePointRepository;
 import fr.orionbs.services.CurvePointService;
+import fr.orionbs.services.MapperService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,10 +16,12 @@ import java.util.List;
 @Transactional
 public class CurvePointServiceImpl implements CurvePointService {
 
-    private CurvePointRepository curvePointRepository;
+    private final CurvePointRepository curvePointRepository;
+    private final MapperService mapperService;
 
-    public CurvePointServiceImpl(CurvePointRepository curvePointRepository) {
+    public CurvePointServiceImpl(CurvePointRepository curvePointRepository, MapperService mapperService) {
         this.curvePointRepository = curvePointRepository;
+        this.mapperService = mapperService;
     }
 
     @Override
@@ -30,8 +32,7 @@ public class CurvePointServiceImpl implements CurvePointService {
         }
 
         log.info("Creating CurvePoint, {}", curvePointDTO);
-        CurvePoint curvePoint = curvePointDTO.curvePointDtoToCurvePoint(curvePointDTO);
-        curvePointRepository.save(curvePoint);
+        curvePointRepository.save(mapperService.curvePointDtoToCurvePoint(curvePointDTO));
         return true;
     }
 
@@ -39,14 +40,13 @@ public class CurvePointServiceImpl implements CurvePointService {
     public CurvePointDTO readingCurvePoint(Integer index) {
         log.info("Reading CurvePoint Id {}", index);
         CurvePoint curvePoint = curvePointRepository.getById(index);
-        return new CurvePointDTO().curvePointToCurvePointDto(curvePoint);
+        return mapperService.curvePointToCurvePointDto(curvePoint);
     }
 
     @Override
     public List<CurvePointDTO> readingAllCurvePoint() {
         log.info("Reading All CurvePoints");
-        CurvePointDTO curvePointDTO = CurvePointDTO.builder().build();
-        return curvePointDTO.curvePointToCurvePointDtoList(curvePointRepository.findAll());
+        return mapperService.curvePointToCurvePointDtoList(curvePointRepository.findAll());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CurvePointServiceImpl implements CurvePointService {
             return false;
         }
 
-        CurvePoint curvePoint = curvePointDTO.curvePointDtoToCurvePoint(curvePointDTO);
+        CurvePoint curvePoint = mapperService.curvePointDtoToCurvePoint(curvePointDTO);
         log.info("Updating CurvePoint, {}", curvePointDTO);
         curvePointRepository.save(curvePoint);
         return true;

@@ -1,9 +1,7 @@
 package fr.orionbs.restControllers;
 
-import fr.orionbs.dto.TradeDTO;
+import fr.orionbs.dtos.TradeDTO;
 import fr.orionbs.services.TradeService;
-import fr.orionbs.services.impl.TradeServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +13,11 @@ import java.util.List;
 @RequestMapping(path = "/api/trade")
 public class TradeRestController {
 
-    @Autowired
-    TradeService tradeService;
+    private final TradeService tradeService;
+
+    public TradeRestController(TradeService tradeService) {
+        this.tradeService = tradeService;
+    }
 
     @PostMapping
     public ResponseEntity<Boolean> creatingTrade(@RequestBody TradeDTO tradeDTO) {

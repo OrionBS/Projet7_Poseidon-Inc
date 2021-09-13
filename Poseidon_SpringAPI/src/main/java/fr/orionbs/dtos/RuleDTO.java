@@ -1,4 +1,4 @@
-package fr.orionbs.dto;
+package fr.orionbs.dtos;
 
 import fr.orionbs.models.Rule;
 import lombok.*;
