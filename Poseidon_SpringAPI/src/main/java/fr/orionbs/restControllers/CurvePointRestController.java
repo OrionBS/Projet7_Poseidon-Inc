@@ -2,6 +2,7 @@ package fr.orionbs.restControllers;
 
 import fr.orionbs.dto.CurvePointDTO;
 import fr.orionbs.services.CurvePointService;
+import fr.orionbs.services.impl.CurvePointServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

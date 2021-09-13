@@ -1,4 +1,4 @@
-package fr.orionbs.security;
+package fr.orionbs.dto;
 
 import lombok.*;
 
@@ -8,6 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class JwtResponse {
+public class TokenDTO {
     private String token;
 }

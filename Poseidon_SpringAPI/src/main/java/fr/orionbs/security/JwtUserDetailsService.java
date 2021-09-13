@@ -12,12 +12,12 @@ import java.util.Collections;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
+
     private final UserRepository userRepository;
 
     public JwtUserDetailsService(UserRepository repository) {
         this.userRepository = repository;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

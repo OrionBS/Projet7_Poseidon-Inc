@@ -2,6 +2,7 @@ package fr.orionbs.restControllers;
 
 import fr.orionbs.dto.UserDTO;
 import fr.orionbs.services.UserService;
+import fr.orionbs.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

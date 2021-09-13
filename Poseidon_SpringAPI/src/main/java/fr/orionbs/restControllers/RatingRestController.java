@@ -2,6 +2,7 @@ package fr.orionbs.restControllers;
 
 import fr.orionbs.dto.RatingDTO;
 import fr.orionbs.services.RatingService;
+import fr.orionbs.services.impl.RatingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

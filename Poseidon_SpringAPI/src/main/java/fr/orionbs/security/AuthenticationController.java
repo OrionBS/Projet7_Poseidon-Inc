@@ -1,7 +1,9 @@
 package fr.orionbs.security;
 
 import fr.orionbs.dto.CredentialsDTO;
+import fr.orionbs.dto.TokenDTO;
 import fr.orionbs.services.UserService;
+import fr.orionbs.services.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,22 +31,22 @@ public class AuthenticationController {
     private UserService userService;
 
     @PostMapping(path = "/register")
-    public JwtResponse register(@RequestBody CredentialsDTO registrationDTO) {
+    public ResponseEntity<TokenDTO> register(@RequestBody CredentialsDTO credentialsDTO) {
 
-        return userService.register(registrationDTO);
+        return new ResponseEntity<>(userService.register(credentialsDTO), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/authenticate")
-    public ResponseEntity<JwtResponse> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<TokenDTO> createAuthenticationToken(@RequestBody CredentialsDTO credentialsDTO) throws Exception {
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        authenticate(credentialsDTO.getUsername(), credentialsDTO.getPassword());
 
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+                .loadUserByUsername(credentialsDTO.getUsername());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return new ResponseEntity<>(new TokenDTO(token), HttpStatus.OK);
     }
 
     private void authenticate(String username, String password) throws Exception {
