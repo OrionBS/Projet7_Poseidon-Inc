@@ -1,25 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCardModule} from '@angular/material/card';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BidsViewComponent } from './bids-view/bids-view.component';
 import { CurvePointsViewComponent } from './curve-points-view/curve-points-view.component';
 import { RatingsViewComponent } from './ratings-view/ratings-view.component';
 import { TradesViewComponent } from './trades-view/trades-view.component';
 import { RulesViewComponent } from './rules-view/rules-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
-import { AddBidViewComponent } from './add-bid-view/add-bid-view.component';
-import { UpdateBidViewComponent } from './update-bid-view/update-bid-view.component';
-import { AddCurvePointViewComponent } from './add-curve-point-view/add-curve-point-view.component';
-import { UpdateCurvePointViewComponent } from './update-curve-point-view/update-curve-point-view.component';
-import { AddRatingViewComponent } from './add-rating-view/add-rating-view.component';
-import { UpdateRatingViewComponent } from './update-rating-view/update-rating-view.component';
-import { AddTradeViewComponent } from './add-trade-view/add-trade-view.component';
-import { UpdateTradeViewComponent } from './update-trade-view/update-trade-view.component';
-import { AddRuleViewComponent } from './add-rule-view/add-rule-view.component';
-import { UpdateRuleViewComponent } from './update-rule-view/update-rule-view.component';
-import { NotFoundViewComponent } from './not-found-view/not-found-view.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,21 +33,23 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
     TradesViewComponent,
     RulesViewComponent,
     LoginViewComponent,
-    AddBidViewComponent,
-    UpdateBidViewComponent,
-    AddCurvePointViewComponent,
-    UpdateCurvePointViewComponent,
-    AddRatingViewComponent,
-    UpdateRatingViewComponent,
-    AddTradeViewComponent,
-    UpdateTradeViewComponent,
-    AddRuleViewComponent,
-    UpdateRuleViewComponent,
-    NotFoundViewComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonToggleModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

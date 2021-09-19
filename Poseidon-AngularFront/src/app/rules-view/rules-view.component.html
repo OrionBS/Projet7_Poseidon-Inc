@@ -1,32 +1,110 @@
-<section>
-    <header>
-        <h1>Rules</h1>
-        <a routerLink="/rules/addRule">Add New</a>
-        <a>Delete All</a>
-    </header>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>JSON</th>
-            <th>Template</th>
-            <th>Sql Str</th>
-            <th>Sql Part</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            <td>45</td>
-            <td>Rule Name</td>
-            <td>Rule Description</td>
-            <td>Rule JSON</td>
-            <td>Rule Template</td>
-            <td>Rule Sql Str</td>
-            <td>Rule Sql Part</td>
-            <td class="actionTd">
-                <a routerLink="/rules/updateRule/45">Edit</a>
-                <a>Delete</a>
-            </td>
-        </tr>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">list</mat-icon>
+      Rule's List
+    </ng-template>
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="json">
+        <th mat-header-cell *matHeaderCellDef> JSON </th>
+        <td mat-cell *matCellDef="let element"> {{element.json}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="template">
+        <th mat-header-cell *matHeaderCellDef> Template </th>
+        <td mat-cell *matCellDef="let element"> {{element.template}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="sqlStr">
+        <th mat-header-cell *matHeaderCellDef> Sql Str </th>
+        <td mat-cell *matCellDef="let element"> {{element.sqlStr}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="sqlPart">
+        <th mat-header-cell *matHeaderCellDef> Sql Part </th>
+        <td mat-cell *matCellDef="let element"> {{element.sqlPart}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-button-toggle-group appearance="legacy" #group="matButtonToggleGroup">
+            <mat-button-toggle value="left" aria-label="Text align left">
+              <mat-icon>update</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="center" aria-label="Text align center">
+              <mat-icon>delete</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</section>
+
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">add</mat-icon>
+      Add Rule
+    </ng-template>
+
+    <form action="">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>JSON</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Template</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sql Str</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sql Part</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Add</button>
+    </form>
+      
+
+  </mat-tab>
+</mat-tab-group>

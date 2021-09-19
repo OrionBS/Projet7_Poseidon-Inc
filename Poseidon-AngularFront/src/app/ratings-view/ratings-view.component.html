@@ -1,28 +1,89 @@
-<section>
-    <header>
-        <h1>Ratings</h1>
-        <a routerLink="/ratings/addRating">Add New</a>
-        <a>Delete All</a>
-    </header>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Moody Rating</th>
-            <th>S&P Rating</th>
-            <th>Fitch Rating</th>
-            <th>Order Number</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            <td>45</td>
-            <td>Account Moody</td>
-            <td>Account S&P</td>
-            <td>Account Fitch</td>
-            <td>10.0</td>
-            <td class="actionTd">
-                <a routerLink="/ratings/updateRating/45">Edit</a>
-                <a>Delete</a>
-            </td>
-        </tr>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">list</mat-icon>
+      Rating's List
+    </ng-template>
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="moodyRating">
+      <th mat-header-cell *matHeaderCellDef> Moody Rating </th>
+      <td mat-cell *matCellDef="let element"> {{element.moodyRating}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="sAndPRating">
+      <th mat-header-cell *matHeaderCellDef> S&P Rating </th>
+      <td mat-cell *matCellDef="let element"> {{element.sAndPRating}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fitchRating">
+        <th mat-header-cell *matHeaderCellDef> Fitch Rating </th>
+        <td mat-cell *matCellDef="let element"> {{element.fitchRating}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderNumber">
+        <th mat-header-cell *matHeaderCellDef> Order Number </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-button-toggle-group appearance="legacy" #group="matButtonToggleGroup">
+            <mat-button-toggle value="left" aria-label="Text align left">
+              <mat-icon>update</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="center" aria-label="Text align center">
+              <mat-icon>delete</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</section>
+
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">add</mat-icon>
+      Add Rating
+    </ng-template>
+
+    <form action="">
+      <mat-form-field appearance="outline">
+        <mat-label>Moody Rating</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>S&P Rating</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fitch Rating</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Order Number</mat-label>
+        <input type="number" matInput>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Add</button>
+    </form>
+      
+
+  </mat-tab>
+</mat-tab-group>

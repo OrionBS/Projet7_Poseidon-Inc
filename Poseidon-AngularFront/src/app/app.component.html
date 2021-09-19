@@ -1,17 +1,34 @@
-<menu>
-  <div class="leftMenu">
-    <img src="assets/logo.png" alt="Logo PoseidonInc">
-    <a routerLink="bids" routerLinkActive="activeA">Bids</a>
-    <a routerLink="curvePoints" routerLinkActive="activeA">Curve Points</a>
-    <a routerLink="ratings" routerLinkActive="activeA">Ratings</a>
-    <a routerLink="trades" routerLinkActive="activeA">Trades</a>
-    <a routerLink="rules" routerLinkActive="activeA">Rules</a>
-  </div>
-  <!-- Add If not auth display: none -->
-  <div class="rightMenu">
-    <p>Role : Admin</p>
-    <a>Log Out</a>
-  </div>
-  <!--  -->
-</menu>
+<mat-toolbar color="primary">
+  <span>Poseidon Inc - Trading App</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" xPosition="before" color="primary">
+    <button mat-menu-item [routerLink]="['bids']">
+      <mat-icon>payments</mat-icon>
+      <span>Bids</span>
+    </button>
+    <button mat-menu-item [routerLink]="['curvePoints']">
+      <mat-icon>trending_up</mat-icon>
+      <span>Curve Points</span>
+    </button>
+    <button mat-menu-item [routerLink]="['ratings']">
+      <mat-icon>rate_review</mat-icon>
+      <span>Ratings</span>
+    </button>
+    <button mat-menu-item [routerLink]="['trades']">
+      <mat-icon>savings</mat-icon>
+      <span>Trades</span>
+    </button>
+    <button mat-menu-item [routerLink]="['rules']">
+      <mat-icon>gavel</mat-icon>
+      <span>Rules</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+</mat-menu>
+</mat-toolbar>
 <router-outlet></router-outlet>

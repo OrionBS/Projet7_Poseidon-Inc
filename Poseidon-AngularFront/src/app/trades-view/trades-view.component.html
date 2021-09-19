@@ -1,26 +1,80 @@
-<section>
-    <header>
-        <h1>Trades</h1>
-        <a routerLink="/trades/addTrade">Add New</a>
-        <a>Delete All</a>
-    </header>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Account</th>
-            <th>Type</th>
-            <th>Buy Quantity</th>
-            <th>Action</th>
-        </tr>
-        <tr>
-            <td>44</td>
-            <td>Account Name</td>
-            <td>Account Type</td>
-            <td>10.0</td>
-            <td class="actionTd">
-                <a routerLink="/trades/updateTrade/44">Edit</a>
-                <a>Delete</a>
-            </td>
-        </tr>
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">list</mat-icon>
+      Trade's List
+    </ng-template>
+
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="account">
+      <th mat-header-cell *matHeaderCellDef> Account </th>
+      <td mat-cell *matCellDef="let element"> {{element.account}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="buyQuantity">
+        <th mat-header-cell *matHeaderCellDef> Buy Quantity </th>
+        <td mat-cell *matCellDef="let element"> {{element.buyQuantity}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-button-toggle-group appearance="legacy" #group="matButtonToggleGroup">
+            <mat-button-toggle value="left" aria-label="Text align left">
+              <mat-icon>update</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="center" aria-label="Text align center">
+              <mat-icon>delete</mat-icon>
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</section>
+
+
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">add</mat-icon>
+      Add Trade
+    </ng-template>
+
+    <form action="">
+      <mat-form-field appearance="outline">
+        <mat-label>Account</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Type</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Buy Quantity</mat-label>
+        <input type="number" matInput>
+      </mat-form-field>
+      <button mat-raised-button color="primary">Add</button>
+    </form>
+      
+
+  </mat-tab>
+</mat-tab-group>
