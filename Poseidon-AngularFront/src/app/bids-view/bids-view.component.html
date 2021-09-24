@@ -5,48 +5,36 @@
       Bid's List
     </ng-template>
 
-
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="account">
-      <th mat-header-cell *matHeaderCellDef> Account </th>
-      <td mat-cell *matCellDef="let element"> {{element.account}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type </th>
-      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="bidQuantity">
-        <th mat-header-cell *matHeaderCellDef> Bid Quantity </th>
-        <td mat-cell *matCellDef="let element"> {{element.bidQuantity}} </td>
-    </ng-container>
-    <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-          <mat-button-toggle-group appearance="legacy" #group="matButtonToggleGroup">
-            <mat-button-toggle value="left" aria-label="Text align left">
-              <mat-icon>update</mat-icon>
-            </mat-button-toggle>
-            <mat-button-toggle value="center" aria-label="Text align center">
-              <mat-icon>delete</mat-icon>
-            </mat-button-toggle>
-          </mat-button-toggle-group>
+    <table class="">
+      <thead>
+      <tr>
+        <th class="mat-header-cell" scope="col">#</th>
+        <th class="mat-header-cell" scope="col">Account</th>
+        <th class="mat-header-cell" scope="col">Type</th>
+        <th class="mat-header-cell" scope="col">Bid Quantity</th>
+        <th class="mat-header-cell" scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bid of bidList">
+        <th scope="row">{{ bid.id }}</th>
+        <td>{{ bid.account }}</td>
+        <td>{{ bid.type }}</td>
+        <td>{{ bid.bidQuantity | number }}</td>
+        <td>
+          <button mat-icon-button color="primary">
+            <mat-icon>update</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <h4 class="deleteQuestion">Are you sure ?</h4>
+            <button mat-menu-item (click)="onDelete(bid.id)" >Yes</button>
+          </mat-menu>
         </td>
-    </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </tr>
+      </tbody>
     </table>
 
 
@@ -58,20 +46,20 @@
       Add Bid
     </ng-template>
 
-    <form action="">
+    <form (ngSubmit)="onSubmit()" >
       <mat-form-field appearance="outline">
         <mat-label>Account</mat-label>
-        <input matInput>
+        <input [(ngModel)]="account" matInput name="account">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
-        <input matInput>
+        <input [(ngModel)]="type" matInput name="type">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bid Quantity</mat-label>
-        <input type="number" matInput>
+        <input [(ngModel)]="bidQuantity" type="number" matInput name="bidQuantity">
       </mat-form-field>
-      <button mat-raised-button color="primary">Add</button>
+      <button mat-raised-button color="primary" type="submit">Add</button>
     </form>
       
 

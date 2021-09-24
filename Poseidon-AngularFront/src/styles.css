@@ -1,9 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #303030; }
+html, body { 
+  height: 100%;
+}
+body { 
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #303030;
+}
 table {
   width: 100%;
+  background: #424242;
+  color: white;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,.12);
 }
 form {
   display: flex;
@@ -25,5 +37,28 @@ app-not-found {
 }
 div.notFoundButton {
   display: flex;
+  gap: 0.5rem;
+}
+div.actionButton {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+input.mat-input-element {
+  color: white;
+}
+h4.deleteQuestion {
+  text-align: center;
+  color: white;
+}
+button.outBoxAddButton {
+  position: absolute;
+  z-index: 50;
+  bottom: 1rem;
+  right: 1rem;
+}
+div.buttonGroup {
+  display: flex;
+  flex-direction: row;
   gap: 0.5rem;
 }

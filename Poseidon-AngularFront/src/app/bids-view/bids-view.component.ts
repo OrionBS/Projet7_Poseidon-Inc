@@ -1,34 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
-export interface BidObject {
-  id: number;
-  account: string;
-  type: string;
-  bidQuantity: number;
-  action: any;
-}
-
-const ELEMENT_DATA: BidObject[] = [
-  {id: 1, account: 'Account Name', type: 'Account Type', bidQuantity: 10.0, action:''},
-  {id: 2, account: 'Account Name', type: 'Account Type', bidQuantity: 10.0, action:''},
-  {id: 3, account: 'Account Name', type: 'Account Type', bidQuantity: 10.0, action:''},
-  {id: 4, account: 'Account Name', type: 'Account Type', bidQuantity: 10.0, action:''},
-  {id: 5, account: 'Account Name', type: 'Account Type', bidQuantity: 10.0, action:''},
-  {id: 6, account: 'Account Name', type: 'Account Type', bidQuantity: 10.0, action:''},
-];
+import { Bid } from '../models/bid';
 
 @Component({
   selector: 'app-bids-view',
   templateUrl: './bids-view.component.html',
   styleUrls: ['./bids-view.component.css']
 })
-export class BidsViewComponent implements OnInit {
+export class BidsViewComponent implements OnInit{
 
-  displayedColumns: string[] = ['id', 'account', 'type', 'bidQuantity', 'action'];
-  dataSource = ELEMENT_DATA;
+  account: string = '';
+  type: string = '';
+  bidQuantity: number = 0;
+
+  bidList: Bid[] = [
+    {id: 1, account: 'Orion', type: 'Trade', bidQuantity: 15}
+  ];
 
   constructor() { }
+
+  onSubmit() {
+    console.log(this.account,this.type,this.bidQuantity);
+    this.bidList.push(new Bid(this.account, this.type, this.bidQuantity));
+  }
+
+  onUpdate() {
+    let updateBid: Bid = new Bid(account, type, bidQuantity);
+    updateBid.id = id;
+    console.log("Bid "+id+" updated." );
+    this.bidList[id-1] = updateBid;
+  }
+
+  onDelete(id: any) {
+    console.log("Bid "+id+" deleted.")
+    this.bidList.splice(id-1, 1);
+  }
 
   ngOnInit(): void {
   }

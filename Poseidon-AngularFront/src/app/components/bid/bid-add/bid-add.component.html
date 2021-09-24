@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Bid's Add</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <form (ngSubmit)="onAdd()">
+      <mat-form-field appearance="outline">
+        <mat-label>Account</mat-label>
+        <input [(ngModel)]="account" matInput name="account">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+    	  <mat-label>Type</mat-label>
+        <input [(ngModel)]="type" matInput name="type">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Bid Quantity</mat-label>
+        <input [(ngModel)]="bidQuantity" type="number" matInput name="bidQuantity">
+      </mat-form-field>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </div>
+    </form>
+
+  </mat-card-content>
+</mat-card>
