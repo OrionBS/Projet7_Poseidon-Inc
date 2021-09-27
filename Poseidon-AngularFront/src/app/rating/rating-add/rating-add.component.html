@@ -3,25 +3,29 @@
     <mat-card-title>Rating's Add</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
+
+    <form (ngSubmit)= "onAdd()">
       <mat-form-field appearance="outline">
-        <mat-label>Moody Rating</mat-label>
-        <input matInput>
+        <mat-label>Moodys Rating</mat-label>
+        <input [(ngModel)]="newRating.moodysRating" matInput name="newRating.moodysRating">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>S&P Rating</mat-label>
-        <input matInput>
+        <input [(ngModel)]="newRating.sAndPRating" matInput name="newRating.sAndPRating">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Fitch Rating</mat-label>
-        <input matInput>
+        <input [(ngModel)]="newRating.fitchRating" matInput name="newRating.fitchRating">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Order Number</mat-label>
-        <input type="number" matInput>
+        <input type="number" [(ngModel)]="newRating.orderNumber" matInput name="newRating.orderNumber">
       </mat-form-field>
-      <button mat-raised-button color="warn" type="button">Back</button>
-      <button mat-raised-button color="primary">Add</button>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </div>
     </form>
+
   </mat-card-content>
 </mat-card>

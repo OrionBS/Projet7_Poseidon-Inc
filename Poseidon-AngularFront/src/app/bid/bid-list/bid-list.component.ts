@@ -14,11 +14,11 @@ export class BidListComponent implements OnInit {
   constructor(private bidService: BidService) { }
 
   ngOnInit(): void {
-    this.bidService.findAll().subscribe(bids => this.bidList = bids);
+    this.bidService.readingAllBid().subscribe(bids => this.bidList = bids);
   }
 
   onDelete(id: any) {
-    this.bidService.delete(id).subscribe();
+    this.bidService.deletingBid(id).subscribe();
     let indexOf = this.bidList.findIndex(x =>x.id === id);
     this.bidList.splice(indexOf,1);
   }

@@ -3,6 +3,25 @@
     <mat-card-title>User's Add</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+
+    <form (ngSubmit)="onAdd()">
+      <mat-form-field appearance="outline">
+        <mat-label>UserName</mat-label>
+        <input [(ngModel)]="newUser.userName" matInput name="newUser.userName">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+    	  <mat-label>FullName</mat-label>
+        <input [(ngModel)]="newUser.fullName" matInput name="newUser.fullName">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <input [(ngModel)]="newUser.role" type="number" matInput name="newUser.role">
+      </mat-form-field>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </div>
+    </form>
     
   </mat-card-content>
 </mat-card>

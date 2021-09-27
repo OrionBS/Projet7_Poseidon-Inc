@@ -16,14 +16,14 @@ export class BidUpdateComponent implements OnInit {
   constructor(private route: ActivatedRoute, private bidService: BidService) { }
 
   onUpdate() {
-    this.bidService.updateBid(this.updateBid).subscribe();
+    this.bidService.updatingBid(this.updateBid).subscribe();
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
        this.updateBid.id = +params['id'];
        });
-    this.bidService.getBid(this.updateBid.id).subscribe(bidFind => this.updateBid = bidFind);
+    this.bidService.readingBid(this.updateBid.id).subscribe(bidFind => this.updateBid = bidFind);
   }
 
 }

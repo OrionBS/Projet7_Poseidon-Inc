@@ -11,19 +11,19 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Account</mat-label>
-        <input [(ngModel)]="updateBid.account" matInput name="account">
+        <input [(ngModel)]="updateBid.account" matInput name="updateBid.account">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
-        <input [(ngModel)]="updateBid.type" matInput name="type">
+        <input [(ngModel)]="updateBid.type" matInput name="updateBid.type">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Bid Quantity</mat-label>
-        <input [(ngModel)]="updateBid.bidQuantity" type="number" matInput name="bidQuantity">
+        <input [(ngModel)]="updateBid.bidQuantity" type="number" matInput name="updateBid.bidQuantity">
       </mat-form-field>
       <div class="buttonGroup">
         <button mat-raised-button color="warn" type="button" [routerLink]="['../../']">Back</button>
-        <button mat-raised-button color="primary" type="submit">Add</button>
+        <button mat-raised-button color="primary" type="submit">Update</button>
       </div>
     </form>
 

@@ -14,16 +14,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row"></th>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let curvePoint of curvePointList">
+          <th scope="row">{{ curvePoint.id | number }}</th>
+          <td>{{ curvePoint.curveId | number }}</td>
+          <td>{{ curvePoint.term | number }}</td>
+          <td>{{ curvePoint.value | number }}</td>
           <td>
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" [routerLink]="['./update', curvePoint.id]">
               <mat-icon>update</mat-icon>
             </button>
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" (click) = "onDelete(curvePoint.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -32,6 +32,7 @@
     </table>
   </mat-card-content>
 </mat-card>
-<button mat-mini-fab color="primary" class="outBoxAddButton">
+
+<button mat-mini-fab color="primary" class="outBoxAddButton" [routerLink]="['./add']">
   <mat-icon>add</mat-icon>
 </button>

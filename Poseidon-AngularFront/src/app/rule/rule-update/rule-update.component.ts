@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Rule } from '../rule';
+import { RuleService } from '../rule.service';
 
 @Component({
   selector: 'app-rule-update',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RuleUpdateComponent implements OnInit {
 
-  constructor() { }
+  updateRule: Rule = new Rule();
+
+  constructor(private route: ActivatedRoute, private ruleService: RuleService) { }
+
+  onUpdate() {
+    this.ruleService.updatingRule(this.updateRule).subscribe();
+  }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+       this.updateRule.id = +params['id'];
+       });
+    this.ruleService.readingRule(this.updateRule.id).subscribe(ruleFind => this.updateRule = ruleFind);
   }
 
 }

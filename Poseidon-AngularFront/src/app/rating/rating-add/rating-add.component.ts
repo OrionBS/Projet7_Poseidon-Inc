@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Rating } from '../rating';
+import { RatingService } from '../rating.service';
 
 @Component({
   selector: 'app-rating-add',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RatingAddComponent implements OnInit {
 
-  constructor() { }
+  newRating: Rating = new Rating();
+
+  constructor(private ratingService: RatingService) { }
+
+  onAdd(): void {
+    this.ratingService.creatingRating(this.newRating).subscribe();
+  }
 
   ngOnInit(): void {
   }

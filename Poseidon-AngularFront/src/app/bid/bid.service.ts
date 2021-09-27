@@ -15,28 +15,28 @@ export class BidService {
 
     }
 
-    findAll(): Observable<Bid[]> {
+    readingAllBid(): Observable<Bid[]> {
          return this.http.get<Bid[]>(this.URL);
     }
 
-    getBid(index?: number): Observable<Bid> {
+    readingBid(index?: number): Observable<Bid> {
         return this.http.get<Bid>(this.URL+"/"+index);
     }
 
-    create(bid: Bid): Observable<Bid> {
+    creatingBid(bid: Bid): Observable<Bid> {
         console.log(bid);
         return this.http.post<Bid>(this.URL, bid).pipe(
             tap(b => this.router.navigate(['../bids'])),
         );
     }
 
-    updateBid(bid: Bid): Observable<Bid> {
-        return this.http.put<Bid>(this.URL,bid).pipe(
+    updatingBid(bid: Bid): Observable<Bid> {
+        return this.http.put<Bid>(this.URL, bid).pipe(
             tap(b => this.router.navigate(['../../bids'])),
         )
     }
 
-    delete(index: number): Observable<unknown> {
+    deletingBid(index: number): Observable<unknown> {
         return this.http.delete(this.URL+'?index='+index).pipe();
     }
 }

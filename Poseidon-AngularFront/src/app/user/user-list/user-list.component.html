@@ -4,5 +4,37 @@
   </mat-card-header>
   <mat-card-content>
     
+    <table class="">
+      <thead>
+        <tr>
+          <th class="mat-header-cell" scope="col">#</th>
+          <th class="mat-header-cell" scope="col">UserName</th>
+          <th class="mat-header-cell" scope="col">FullName</th>
+          <th class="mat-header-cell" scope="col">Role</th>
+          <th class="mat-header-cell" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button mat-icon-button color="primary" [routerLink]="['./update', user.id]">
+              <mat-icon>update</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click) = "onDelete(user.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
   </mat-card-content>
 </mat-card>
+
+<button mat-mini-fab color="primary" class="outBoxAddButton" [routerLink]="['./add']">
+  <mat-icon>add</mat-icon>
+</button>

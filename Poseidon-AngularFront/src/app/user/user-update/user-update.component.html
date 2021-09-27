@@ -4,5 +4,28 @@
   </mat-card-header>
   <mat-card-content>
     
+    <form (ngSubmit)="onUpdate()">
+      <mat-form-field appearance="outline">
+        <mat-label>Id</mat-label>
+        <input [(ngModel)]="updateUser.id" matInput name="updateUser.id" disabled>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>UserName</mat-label>
+        <input [(ngModel)]="updateUser.userName" matInput name="updateUser.userName">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>FullName</mat-label>
+        <input [(ngModel)]="updateUser.fullName" matInput name="updateUser.fullName">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <input [(ngModel)]="updateUser.role" matInput name="updateUser.role">
+      </mat-form-field>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Update</button>
+      </div>
+    </form>
+
   </mat-card-content>
 </mat-card>

@@ -3,25 +3,27 @@
     <mat-card-title>Curve Point's Update</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form action="">
+    <form (ngSubmit)="onUpdate()">
       <mat-form-field appearance="outline">
         <mat-label>Id</mat-label>
-        <input matInput type="number" disabled>
+        <input [(ngModel)]="updateCurvePoint.id" matInput name="updateCurvePoint.id" type="number" disabled>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Curve Point Id</mat-label>
-        <input matInput type="number">
+        <input [(ngModel)]="updateCurvePoint.curveId" matInput name="updateCurvePoint.curveId" type="number">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Term</mat-label>
-        <input matInput type="number">
+        <input [(ngModel)]="updateCurvePoint.term" matInput name="updateCurvePoint.term" type="number">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Value</mat-label>
-        <input type="number" matInput>
+        <input type="number" [(ngModel)]="updateCurvePoint.value" matInput name="updateCurvePoint.value">
       </mat-form-field>
-      <button mat-raised-button color="warn" type="button">Back</button>
-      <button mat-raised-button color="primary">Add</button>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Update</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

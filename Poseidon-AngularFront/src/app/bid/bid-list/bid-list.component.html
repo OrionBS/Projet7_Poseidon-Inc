@@ -4,46 +4,36 @@
   </mat-card-header>
   <mat-card-content>
     
-  <table class="">
-  <thead>
-    <tr>
-      <th class="mat-header-cell" scope="col">#</th>
-      <th class="mat-header-cell" scope="col">Account</th>
-      <th class="mat-header-cell" scope="col">Type</th>
-      <th class="mat-header-cell" scope="col">Bid Quantity</th>
-      <th class="mat-header-cell" scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let bid of bidList">
-      <th scope="row">{{ bid.id }}</th>
-      <td>{{ bid.account }}</td>
-      <td>{{ bid.type }}</td>
-      <td>{{ bid.bidQuantity | number }}</td>
-      <td>
-        <button mat-icon-button color="primary" [routerLink]="['./update', bid.id]">
-          <mat-icon>update</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" (click) = "onDelete(bid.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    <table class="">
+      <thead>
+        <tr>
+          <th class="mat-header-cell" scope="col">#</th>
+          <th class="mat-header-cell" scope="col">Account</th>
+          <th class="mat-header-cell" scope="col">Type</th>
+          <th class="mat-header-cell" scope="col">Bid Quantity</th>
+          <th class="mat-header-cell" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bid of bidList">
+          <th scope="row">{{ bid.id }}</th>
+          <td>{{ bid.account }}</td>
+          <td>{{ bid.type }}</td>
+          <td>{{ bid.bidQuantity | number }}</td>
+          <td>
+            <button mat-icon-button color="primary" [routerLink]="['./update', bid.id]">
+              <mat-icon>update</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click) = "onDelete(bid.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
   </mat-card-content>
 </mat-card> 
-
-
-
-
-
-
-
-
-
-
 
 <button mat-mini-fab color="primary" class="outBoxAddButton" [routerLink]="['./add']">
   <mat-icon>add</mat-icon>

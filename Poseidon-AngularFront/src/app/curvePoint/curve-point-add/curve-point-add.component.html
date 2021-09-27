@@ -3,21 +3,25 @@
     <mat-card-title>Curve Point's Add</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form action="">
+
+    <form (ngSubmit)="onAdd()">
       <mat-form-field appearance="outline">
         <mat-label>Curve Point Id</mat-label>
-        <input matInput type="number">
+        <input [(ngModel)]="newCurvePoint.curveId" matInput name="newCurvePoint.curveId" type="number">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Term</mat-label>
-        <input matInput type="number">
+        <input [(ngModel)]="newCurvePoint.term" matInput name="newCurvePoint.term" type="number">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Value</mat-label>
-        <input type="number" matInput>
+        <input type="number" [(ngModel)]="newCurvePoint.value" matInput name="newCurvePoint.value">
       </mat-form-field>
-      <button mat-raised-button color="warn" type="button">Back</button>
-      <button mat-raised-button color="primary">Add</button>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </div>
     </form>
+    
   </mat-card-content>
 </mat-card>

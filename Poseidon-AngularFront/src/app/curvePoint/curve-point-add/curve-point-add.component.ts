@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CurvePoint } from '../curve-point';
+import { CurvePointService } from '../curve-point.service';
 
 @Component({
   selector: 'app-curve-point-add',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CurvePointAddComponent implements OnInit {
 
-  constructor() { }
+  newCurvePoint: CurvePoint = new CurvePoint();
+
+  constructor(private curvePointService: CurvePointService) { }
 
   ngOnInit(): void {
+  }
+
+  onAdd(): void {
+    this.curvePointService.creatingCurvePoint(this.newCurvePoint).subscribe();
   }
 
 }

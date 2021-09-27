@@ -10,6 +10,7 @@ export class LoginComponent implements OnInit {
 
   username = '';
   password = '';
+  hide = true;
 
   constructor(private auth: AuthenticateService) { }
 

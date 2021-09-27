@@ -3,29 +3,31 @@
     <mat-card-title>Rating's Update</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
+    <form (ngSubmit)="onUpdate()">
       <mat-form-field appearance="outline">
         <mat-label>Id</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRating.id" matInput name="updateRating.id" disabled>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Moody Rating</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRating.moodysRating" matInput name="updateRating.moodysRating">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>S&P Rating</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRating.sAndPRating" matInput name="updateRating.sAndPRating">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Fitch Rating</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRating.fitchRating" matInput name="updateRating.fitchRating">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Order Number</mat-label>
-        <input type="number" matInput>
+        <input type="number" [(ngModel)]="updateRating.orderNumber" matInput name="updateRating.orderNumber">
       </mat-form-field>
-      <button mat-raised-button color="warn" type="button">Back</button>
-      <button mat-raised-button color="primary">Update</button>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Update</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

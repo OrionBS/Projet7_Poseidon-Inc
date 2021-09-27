@@ -3,33 +3,39 @@
     <mat-card-title>Rule's Update</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
+    <form (ngSubmit)="onUpdate()">
+      <mat-form-field appearance="outline">
+        <mat-label>Id</mat-label>
+        <input [(ngModel)]="updateRule.id" matInput name="updateRule.id" disabled>
+      </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRule.name" matInput name="updateRule.name">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Description</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRule.description" matInput name="updateRule.description">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>JSON</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRule.json" matInput name="updateRule.json">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Template</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRule.template" matInput name="updateRule.template">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Sql Str</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRule.sqlStr" matInput name="updateRule.sqlStr">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Sql Part</mat-label>
-        <input matInput>
+        <input [(ngModel)]="updateRule.sqlPart" matInput name="updateRule.sqlPart">
       </mat-form-field>
-      <button mat-raised-button color="warn" type="button">Back</button>
-      <button mat-raised-button color="primary">Add</button>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Update</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

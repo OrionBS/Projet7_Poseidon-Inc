@@ -14,7 +14,7 @@ export class BidAddComponent implements OnInit {
   constructor(private bidService: BidService) { }
 
   onAdd(): void {
-    this.bidService.create(this.newBid).subscribe();
+    this.bidService.creatingBid(this.newBid).subscribe();
   }
 
   ngOnInit(): void {

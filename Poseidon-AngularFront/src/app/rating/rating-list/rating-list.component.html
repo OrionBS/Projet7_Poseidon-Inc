@@ -3,6 +3,7 @@
     <mat-card-title>Rating's List</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+
     <table class="">
       <thead>
         <tr>
@@ -15,25 +16,27 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row"></th>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let rating of ratingList">
+          <th scope="row">{{ rating.id }}</th>
+          <td>{{ rating.moodysRating }}</td>
+          <td>{{ rating.sAndPRating }}</td>
+          <td>{{ rating.fitchRating }}</td>
+          <td>{{ rating.orderNumber | number }}</td>
           <td>
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" [routerLink]="['./update', rating.id]">
               <mat-icon>update</mat-icon>
             </button>
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" (click) = "onDelete(rating.id)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
+
   </mat-card-content>
 </mat-card>
-<button mat-mini-fab color="primary" class="outBoxAddButton">
+
+<button mat-mini-fab color="primary" class="outBoxAddButton" [routerLink]="['./add']">
   <mat-icon>add</mat-icon>
 </button>

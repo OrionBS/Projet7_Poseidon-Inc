@@ -3,21 +3,23 @@
     <mat-card-title>Trade's Add</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
+    <form (ngSubmit)="onAdd()">
       <mat-form-field appearance="outline">
         <mat-label>Account</mat-label>
-        <input matInput>
+        <input [(ngModel)]="newTrade.account" matInput name="newBid.account">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
-        <input matInput>
+        <input [(ngModel)]="newTrade.type" matInput name="newBid.type">
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Buy Quantity</mat-label>
-        <input matInput>
+        <input [(ngModel)]="newTrade.buyQuantity" matInput name="newBid.buyQuantity" type="number">
       </mat-form-field>
-      <button mat-raised-button color="warn" type="button">Back</button>
-      <button mat-raised-button color="primary">Add</button>
+      <div class="buttonGroup">
+        <button mat-raised-button color="warn" type="button" [routerLink]="['../']">Back</button>
+        <button mat-raised-button color="primary" type="submit">Add</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>
