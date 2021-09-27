@@ -62,3 +62,10 @@ div.buttonGroup {
   flex-direction: row;
   gap: 0.5rem;
 }
+
+app-login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
