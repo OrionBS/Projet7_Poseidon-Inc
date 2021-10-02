@@ -9,13 +9,13 @@ import fr.orionbs.security.JwtTokenUtil;
 import fr.orionbs.services.MapperService;
 import fr.orionbs.services.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -66,14 +66,24 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+        Optional<User> isUserPresent = userRepository.findById(userDTO.getId());
+
+        User oldUser = isUserPresent.get();
+
         if (userRepository.findById(userDTO.getId()) == null) {
             log.info("User doesn't exist");
             return false;
         }
 
         User user = mapperService.userDtoToUser(userDTO);
+
+        oldUser.setFullName(user.getFullName());
+        oldUser.setRole(user.getRole());
+        oldUser.setUsername(user.getUsername());
+
+
         log.info("Updating User, {}", userDTO);
-        userRepository.save(user);
+        userRepository.save(oldUser);
         return true;
     }
 
