@@ -1,10 +1,10 @@
 package fr.orionbs.services.impl;
 
 import fr.orionbs.dtos.BidDTO;
+import fr.orionbs.mappers.BidMapper;
 import fr.orionbs.models.Bid;
 import fr.orionbs.repositories.BidRepository;
 import fr.orionbs.services.BidService;
-import fr.orionbs.services.MapperService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +17,11 @@ import java.util.List;
 public class BidServiceImpl implements BidService {
 
     private BidRepository bidRepository;
-    private MapperService mapperService;
+    private BidMapper bidMapper;
 
-    public BidServiceImpl(BidRepository bidRepository,MapperService mapperService) {
+    public BidServiceImpl(BidRepository bidRepository, BidMapper bidMapper) {
         this.bidRepository = bidRepository;
-        this.mapperService = mapperService;
+        this.bidMapper = bidMapper;
     }
 
     @Override
@@ -30,9 +30,11 @@ public class BidServiceImpl implements BidService {
             log.info("Bid's empty");
             return false;
         }
+        BidMapper bidMapper = new BidMapper();
 
-        log.info("Creating Bid, {}", bidDTO);
-        Bid bid = mapperService.bidDtoToBid(bidDTO);
+        log.info("Receiving BidDTO, {}", bidDTO);
+        Bid bid = bidMapper.bidDtoToBid(bidDTO);
+        log.info("Creating Bid, {}", bid);
         bidRepository.save(bid);
         return true;
     }
@@ -41,13 +43,13 @@ public class BidServiceImpl implements BidService {
     public BidDTO readingBid(Integer index) {
         log.info("Reading Bid Id {}", index);
         Bid bid = bidRepository.getById(index);
-        return mapperService.bidToBidDto(bid);
+        return bidMapper.bidToBidDto(bid);
     }
 
     @Override
     public List<BidDTO> readingAllBid() {
         log.info("Reading All Bids");
-        return mapperService.bidToBidDtoList(bidRepository.findAll());
+        return bidMapper.bidToBidDtoList(bidRepository.findAll());
     }
 
     @Override
@@ -62,7 +64,7 @@ public class BidServiceImpl implements BidService {
             return false;
         }
 
-        Bid bid = mapperService.bidDtoToBid(bidDTO);
+        Bid bid = bidMapper.bidDtoToBid(bidDTO);
         log.info("Updating Bid, {}", bidDTO);
         bidRepository.save(bid);
         return true;

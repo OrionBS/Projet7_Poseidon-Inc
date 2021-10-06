@@ -1,9 +1,9 @@
 package fr.orionbs.services.impl;
 
 import fr.orionbs.dtos.RatingDTO;
+import fr.orionbs.mappers.RatingMapper;
 import fr.orionbs.models.Rating;
 import fr.orionbs.repositories.RatingRepository;
-import fr.orionbs.services.MapperService;
 import fr.orionbs.services.RatingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,11 +17,11 @@ import java.util.List;
 public class RatingServiceImpl implements RatingService {
 
     private final RatingRepository ratingRepository;
-    private final MapperService mapperService;
+    private final RatingMapper ratingMapper;
 
-    public RatingServiceImpl(RatingRepository ratingRepository, MapperService mapperService) {
+    public RatingServiceImpl(RatingRepository ratingRepository, RatingMapper ratingMapper) {
         this.ratingRepository = ratingRepository;
-        this.mapperService = mapperService;
+        this.ratingMapper = ratingMapper;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class RatingServiceImpl implements RatingService {
         }
 
         log.info("Creating Rating, {}", ratingDTO);
-        ratingRepository.save(mapperService.ratingDtoToRating(ratingDTO));
+        ratingRepository.save(ratingMapper.ratingDtoToRating(ratingDTO));
         return true;
     }
 
@@ -40,13 +40,13 @@ public class RatingServiceImpl implements RatingService {
     public RatingDTO readingRating(Integer index) {
         log.info("Reading Rating Id {}", index);
         Rating rating = ratingRepository.getById(index);
-        return mapperService.ratingToRatingDTO(rating);
+        return ratingMapper.ratingToRatingDTO(rating);
     }
 
     @Override
     public List<RatingDTO> readingAllRating() {
         log.info("Reading All Ratings");
-        return mapperService.ratingToRatingDTOList(ratingRepository.findAll());
+        return ratingMapper.ratingToRatingDTOList(ratingRepository.findAll());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class RatingServiceImpl implements RatingService {
             return false;
         }
 
-        Rating rating = mapperService.ratingDtoToRating(ratingDTO);
+        Rating rating = ratingMapper.ratingDtoToRating(ratingDTO);
         log.info("Updating Rating, {}", ratingDTO);
         ratingRepository.save(rating);
         return true;

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AuthenticationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projet7_Poseidon-SpringAPI</a> &gt; <a href="index.source.html" class="el_package">fr.orionbs.security</a> &gt; <span class="el_source">AuthenticationController.java</span></div><h1>AuthenticationController.java</h1><pre class="source lang-java linenums">package fr.orionbs.security;
+
+import fr.orionbs.dtos.CredentialsDTO;
+import fr.orionbs.dtos.TokenDTO;
+import fr.orionbs.services.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@CrossOrigin
+public class AuthenticationController {
+
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtUserDetailsService userDetailsService;
+    private final UserService userService;
+
+<span class="nc" id="L24">    public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, UserService userService) {</span>
+<span class="nc" id="L25">        this.authenticationManager = authenticationManager;</span>
+<span class="nc" id="L26">        this.jwtTokenUtil = jwtTokenUtil;</span>
+<span class="nc" id="L27">        this.userDetailsService = userDetailsService;</span>
+<span class="nc" id="L28">        this.userService = userService;</span>
+<span class="nc" id="L29">    }</span>
+
+    @PostMapping(path = &quot;/register&quot;)
+    public ResponseEntity&lt;TokenDTO&gt; register(@RequestBody CredentialsDTO credentialsDTO) {
+
+<span class="nc" id="L34">        return new ResponseEntity&lt;&gt;(userService.register(credentialsDTO), HttpStatus.CREATED);</span>
+    }
+
+    @PostMapping(path = &quot;/authenticate&quot;)
+    public ResponseEntity&lt;TokenDTO&gt; createAuthenticationToken(@RequestBody CredentialsDTO credentialsDTO) throws Exception {
+
+<span class="nc" id="L40">        authenticate(credentialsDTO.getUsername(), credentialsDTO.getPassword());</span>
+
+<span class="nc" id="L42">        final UserDetails userDetails = userDetailsService</span>
+<span class="nc" id="L43">                .loadUserByUsername(credentialsDTO.getUsername());</span>
+
+<span class="nc" id="L45">        final String token = jwtTokenUtil.generateToken(userDetails);</span>
+
+<span class="nc" id="L47">        return new ResponseEntity&lt;&gt;(new TokenDTO(token), HttpStatus.OK);</span>
+    }
+
+    private void authenticate(String username, String password) throws Exception {
+        try {
+<span class="nc" id="L52">            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));</span>
+<span class="nc" id="L53">        } catch (DisabledException e) {</span>
+<span class="nc" id="L54">            throw new Exception(&quot;USER_DISABLED&quot;, e);</span>
+<span class="nc" id="L55">        } catch (BadCredentialsException e) {</span>
+<span class="nc" id="L56">            throw new Exception(&quot;INVALID_CREDENTIALS&quot;, e);</span>
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

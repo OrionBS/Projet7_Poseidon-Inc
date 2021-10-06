@@ -1,9 +1,9 @@
 package fr.orionbs.services.impl;
 
 import fr.orionbs.dtos.TradeDTO;
+import fr.orionbs.mappers.TradeMapper;
 import fr.orionbs.models.Trade;
 import fr.orionbs.repositories.TradeRepository;
-import fr.orionbs.services.MapperService;
 import fr.orionbs.services.TradeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,11 +17,11 @@ import java.util.List;
 public class TradeServiceImpl implements TradeService {
 
     private final TradeRepository tradeRepository;
-    private final MapperService mapperService;
+    private final TradeMapper tradeMapper;
 
-    public TradeServiceImpl(TradeRepository tradeRepository, MapperService mapperService) {
+    public TradeServiceImpl(TradeRepository tradeRepository, TradeMapper tradeMapper) {
         this.tradeRepository = tradeRepository;
-        this.mapperService = mapperService;
+        this.tradeMapper = tradeMapper;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TradeServiceImpl implements TradeService {
         }
 
         log.info("Creating Trade, {}", tradeDTO);
-        tradeRepository.save(mapperService.tradeDtoToTrade(tradeDTO));
+        tradeRepository.save(tradeMapper.tradeDtoToTrade(tradeDTO));
         return true;
     }
 
@@ -40,13 +40,13 @@ public class TradeServiceImpl implements TradeService {
     public TradeDTO readingTrade(Integer index) {
         log.info("Reading Trade Id {}", index);
         Trade trade = tradeRepository.getById(index);
-        return mapperService.tradeToTradeDTO(trade);
+        return tradeMapper.tradeToTradeDTO(trade);
     }
 
     @Override
     public List<TradeDTO> readingAllTrade() {
         log.info("Reading All Trades");
-        return mapperService.tradeToTradeDTOList(tradeRepository.findAll());
+        return tradeMapper.tradeToTradeDTOList(tradeRepository.findAll());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TradeServiceImpl implements TradeService {
             return false;
         }
 
-        Trade trade = mapperService.tradeDtoToTrade(tradeDTO);
+        Trade trade = tradeMapper.tradeDtoToTrade(tradeDTO);
         log.info("Updating Trade, {}", tradeDTO);
         tradeRepository.save(trade);
         return true;

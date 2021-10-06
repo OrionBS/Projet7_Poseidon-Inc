@@ -3,10 +3,10 @@ package fr.orionbs.services.impl;
 import fr.orionbs.dtos.CredentialsDTO;
 import fr.orionbs.dtos.TokenDTO;
 import fr.orionbs.dtos.UserDTO;
+import fr.orionbs.mappers.UserMapper;
 import fr.orionbs.models.User;
 import fr.orionbs.repositories.UserRepository;
 import fr.orionbs.security.JwtTokenUtil;
-import fr.orionbs.services.MapperService;
 import fr.orionbs.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,12 +24,12 @@ public class UserServiceImpl implements UserService {
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserRepository userRepository;
-    private final MapperService mapperService;
+    private final UserMapper userMapper;
 
-    public UserServiceImpl(JwtTokenUtil jwtTokenUtil, UserRepository userRepository, MapperService mapperService) {
+    public UserServiceImpl(JwtTokenUtil jwtTokenUtil, UserRepository userRepository, UserMapper userMapper) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.userRepository = userRepository;
-        this.mapperService = mapperService;
+        this.userMapper = userMapper;
     }
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         }
 
         log.info("Creating User, {}", userDTO);
-        userRepository.save(mapperService.userDtoToUser(userDTO));
+        userRepository.save(userMapper.userDtoToUser(userDTO));
         return true;
     }
 
@@ -50,13 +50,13 @@ public class UserServiceImpl implements UserService {
     public UserDTO readingUser(Integer index) {
         log.info("Reading User Id {}", index);
         User user = userRepository.getById(index);
-        return mapperService.userToUserDTO(user);
+        return userMapper.userToUserDTO(user);
     }
 
     @Override
     public List<UserDTO> readingAllUser() {
         log.info("Reading All Users");
-        return mapperService.userToUserDTOList(userRepository.findAll());
+        return userMapper.userToUserDTOList(userRepository.findAll());
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        User user = mapperService.userDtoToUser(userDTO);
+        User user = userMapper.userDtoToUser(userDTO);
 
         oldUser.setFullName(user.getFullName());
         oldUser.setRole(user.getRole());
