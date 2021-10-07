@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -30,7 +31,7 @@ public class BidServiceImpl implements BidService {
             log.info("Bid's empty");
             return false;
         }
-        BidMapper bidMapper = new BidMapper();
+        bidMapper = new BidMapper();
 
         log.info("Receiving BidDTO, {}", bidDTO);
         Bid bid = bidMapper.bidDtoToBid(bidDTO);
@@ -43,12 +44,19 @@ public class BidServiceImpl implements BidService {
     public BidDTO readingBid(Integer index) {
         log.info("Reading Bid Id {}", index);
         Bid bid = bidRepository.getById(index);
+        if(bid == null) {
+            log.warn("Not found Bid Id {}", index);
+            return null;
+        }
+        log.info("Bid found {}", bid);
+        bidMapper = new BidMapper();
         return bidMapper.bidToBidDto(bid);
     }
 
     @Override
     public List<BidDTO> readingAllBid() {
         log.info("Reading All Bids");
+        bidMapper = new BidMapper();
         return bidMapper.bidToBidDtoList(bidRepository.findAll());
     }
 
@@ -59,14 +67,24 @@ public class BidServiceImpl implements BidService {
             return false;
         }
 
-        if (bidRepository.findById(bidDTO.getId()) == null) {
+        Optional<Bid> isBidPresent = bidRepository.findById(bidDTO.getId());
+
+        if (isBidPresent == null) {
             log.info("Bid doesn't exist");
             return false;
         }
 
+        Bid oldBid = isBidPresent.get();
+
+        bidMapper = new BidMapper();
         Bid bid = bidMapper.bidDtoToBid(bidDTO);
-        log.info("Updating Bid, {}", bidDTO);
-        bidRepository.save(bid);
+
+        oldBid.setAccount(bid.getAccount());
+        oldBid.setType(bid.getType());
+        oldBid.setBidQuantity(bid.getBidQuantity());
+
+        log.info("Updating Bid, {}", oldBid);
+        bidRepository.save(oldBid);
         return true;
     }
 

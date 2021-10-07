@@ -1,6 +1,6 @@
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/repositoriesTest/UserRepositoryTest.java
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/repositoriesTest/BidRepositoryTest.java
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/repositoriesTest/TradeRepositoryTest.java
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/repositoriesTest/RuleRepositoryTest.java
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/repositoriesTest/CurvePointRepositoryTest.java
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/repositoriesTest/RatingRepositoryTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/TradeServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/CurvePointServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/RatingServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/RuleServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/BidServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/UserServiceTest.java

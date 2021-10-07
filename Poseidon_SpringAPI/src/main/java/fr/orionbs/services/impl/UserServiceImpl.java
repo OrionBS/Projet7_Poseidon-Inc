@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    private UserMapper userMapper;
 
     public UserServiceImpl(JwtTokenUtil jwtTokenUtil, UserRepository userRepository, UserMapper userMapper) {
         this.jwtTokenUtil = jwtTokenUtil;
@@ -41,6 +41,8 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+        userMapper = new UserMapper();
+
         log.info("Creating User, {}", userDTO);
         userRepository.save(userMapper.userDtoToUser(userDTO));
         return true;
@@ -50,12 +52,19 @@ public class UserServiceImpl implements UserService {
     public UserDTO readingUser(Integer index) {
         log.info("Reading User Id {}", index);
         User user = userRepository.getById(index);
+        if(user == null) {
+            log.warn("Not found User Id {}", index);
+            return null;
+        }
+        log.info("User found {}", user);
+        userMapper = new UserMapper();
         return userMapper.userToUserDTO(user);
     }
 
     @Override
     public List<UserDTO> readingAllUser() {
         log.info("Reading All Users");
+        userMapper = new UserMapper();
         return userMapper.userToUserDTOList(userRepository.findAll());
     }
 
@@ -68,13 +77,14 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> isUserPresent = userRepository.findById(userDTO.getId());
 
-        User oldUser = isUserPresent.get();
-
-        if (userRepository.findById(userDTO.getId()) == null) {
+        if (isUserPresent == null) {
             log.info("User doesn't exist");
             return false;
         }
 
+        User oldUser = isUserPresent.get();
+
+        userMapper = new UserMapper();
         User user = userMapper.userDtoToUser(userDTO);
 
         oldUser.setFullName(user.getFullName());
@@ -82,7 +92,7 @@ public class UserServiceImpl implements UserService {
         oldUser.setUsername(user.getUsername());
 
 
-        log.info("Updating User, {}", userDTO);
+        log.info("Updating User, {}", oldUser);
         userRepository.save(oldUser);
         return true;
     }

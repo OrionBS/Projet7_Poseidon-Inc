@@ -1,15 +1,19 @@
 package fr.orionbs.services.impl;
 
 import fr.orionbs.dtos.CurvePointDTO;
+import fr.orionbs.mappers.BidMapper;
 import fr.orionbs.mappers.CurvePointMapper;
+import fr.orionbs.models.Bid;
 import fr.orionbs.models.CurvePoint;
 import fr.orionbs.repositories.CurvePointRepository;
 import fr.orionbs.services.CurvePointService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.geo.Circle;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -17,7 +21,7 @@ import java.util.List;
 public class CurvePointServiceImpl implements CurvePointService {
 
     private final CurvePointRepository curvePointRepository;
-    private final CurvePointMapper curvePointMapper;
+    private CurvePointMapper curvePointMapper;
 
     public CurvePointServiceImpl(CurvePointRepository curvePointRepository, CurvePointMapper curvePointMapper) {
         this.curvePointRepository = curvePointRepository;
@@ -31,6 +35,8 @@ public class CurvePointServiceImpl implements CurvePointService {
             return false;
         }
 
+        curvePointMapper = new CurvePointMapper();
+
         log.info("Creating CurvePoint, {}", curvePointDTO);
         curvePointRepository.save(curvePointMapper.curvePointDtoToCurvePoint(curvePointDTO));
         return true;
@@ -40,12 +46,19 @@ public class CurvePointServiceImpl implements CurvePointService {
     public CurvePointDTO readingCurvePoint(Integer index) {
         log.info("Reading CurvePoint Id {}", index);
         CurvePoint curvePoint = curvePointRepository.getById(index);
+        if(curvePoint == null) {
+            log.warn("Not found CurvePoint Id {}", index);
+            return null;
+        }
+        log.info("CurvePoint found {}", curvePoint);
+        curvePointMapper = new CurvePointMapper();
         return curvePointMapper.curvePointToCurvePointDto(curvePoint);
     }
 
     @Override
     public List<CurvePointDTO> readingAllCurvePoint() {
         log.info("Reading All CurvePoints");
+        curvePointMapper = new CurvePointMapper();
         return curvePointMapper.curvePointToCurvePointDtoList(curvePointRepository.findAll());
     }
 
@@ -56,14 +69,25 @@ public class CurvePointServiceImpl implements CurvePointService {
             return false;
         }
 
-        if (curvePointRepository.findById(curvePointDTO.getId()) == null) {
+        Optional<CurvePoint> isCurvePointPresent = curvePointRepository.findById(curvePointDTO.getId());
+
+        if (isCurvePointPresent == null) {
             log.info("CurvePoint doesn't exist");
             return false;
         }
 
+        CurvePoint oldCurvePoint = isCurvePointPresent.get();
+
+        curvePointMapper = new CurvePointMapper();
         CurvePoint curvePoint = curvePointMapper.curvePointDtoToCurvePoint(curvePointDTO);
-        log.info("Updating CurvePoint, {}", curvePointDTO);
-        curvePointRepository.save(curvePoint);
+
+        oldCurvePoint.setCurveId(curvePoint.getCurveId());
+        oldCurvePoint.setTerm(curvePoint.getTerm());
+        oldCurvePoint.setValue(curvePoint.getValue());
+
+
+        log.info("Updating CurvePoint, {}", oldCurvePoint);
+        curvePointRepository.save(oldCurvePoint);
         return true;
     }
 

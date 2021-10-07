@@ -1,7 +1,9 @@
 package fr.orionbs.services.impl;
 
 import fr.orionbs.dtos.RatingDTO;
+import fr.orionbs.mappers.BidMapper;
 import fr.orionbs.mappers.RatingMapper;
+import fr.orionbs.models.Bid;
 import fr.orionbs.models.Rating;
 import fr.orionbs.repositories.RatingRepository;
 import fr.orionbs.services.RatingService;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Transactional
@@ -17,7 +20,7 @@ import java.util.List;
 public class RatingServiceImpl implements RatingService {
 
     private final RatingRepository ratingRepository;
-    private final RatingMapper ratingMapper;
+    private RatingMapper ratingMapper;
 
     public RatingServiceImpl(RatingRepository ratingRepository, RatingMapper ratingMapper) {
         this.ratingRepository = ratingRepository;
@@ -30,6 +33,7 @@ public class RatingServiceImpl implements RatingService {
             log.info("Rating is empty");
             return false;
         }
+        ratingMapper = new RatingMapper();
 
         log.info("Creating Rating, {}", ratingDTO);
         ratingRepository.save(ratingMapper.ratingDtoToRating(ratingDTO));
@@ -40,12 +44,19 @@ public class RatingServiceImpl implements RatingService {
     public RatingDTO readingRating(Integer index) {
         log.info("Reading Rating Id {}", index);
         Rating rating = ratingRepository.getById(index);
+        if(rating == null) {
+            log.warn("Not found Rating Id {}", index);
+            return null;
+        }
+        log.info("Rating found {}", rating);
+        ratingMapper = new RatingMapper();
         return ratingMapper.ratingToRatingDTO(rating);
     }
 
     @Override
     public List<RatingDTO> readingAllRating() {
         log.info("Reading All Ratings");
+        ratingMapper = new RatingMapper();
         return ratingMapper.ratingToRatingDTOList(ratingRepository.findAll());
     }
 
@@ -56,14 +67,25 @@ public class RatingServiceImpl implements RatingService {
             return false;
         }
 
-        if (ratingRepository.findById(ratingDTO.getId()) == null) {
+        Optional<Rating> isRatingPresent = ratingRepository.findById(ratingDTO.getId());
+
+        if (isRatingPresent == null) {
             log.info("Rating doesn't exist");
             return false;
         }
 
+        Rating oldRating = isRatingPresent.get();
+
+        ratingMapper = new RatingMapper();
         Rating rating = ratingMapper.ratingDtoToRating(ratingDTO);
-        log.info("Updating Rating, {}", ratingDTO);
-        ratingRepository.save(rating);
+
+        oldRating.setMoodysRating(rating.getMoodysRating());
+        oldRating.setSAndPRating(rating.getSAndPRating());
+        oldRating.setFitchRating(rating.getFitchRating());
+        oldRating.setOrderNumber(rating.getOrderNumber());
+
+        log.info("Updating Rating, {}", oldRating);
+        ratingRepository.save(oldRating);
         return true;
     }
 

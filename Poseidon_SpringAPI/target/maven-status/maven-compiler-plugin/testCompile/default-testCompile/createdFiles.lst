@@ -1,6 +1,6 @@
-fr/orionbs/repositoriesTest/TradeRepositoryTest.class
-fr/orionbs/repositoriesTest/CurvePointRepositoryTest.class
-fr/orionbs/repositoriesTest/RuleRepositoryTest.class
-fr/orionbs/repositoriesTest/RatingRepositoryTest.class
-fr/orionbs/repositoriesTest/UserRepositoryTest.class
-fr/orionbs/repositoriesTest/BidRepositoryTest.class
+fr/orionbs/ApplicationTest/servicesTest/CurvePointServiceTest.class
+fr/orionbs/ApplicationTest/servicesTest/UserServiceTest.class
+fr/orionbs/ApplicationTest/servicesTest/BidServiceTest.class
+fr/orionbs/ApplicationTest/servicesTest/TradeServiceTest.class
+fr/orionbs/ApplicationTest/servicesTest/RuleServiceTest.class
+fr/orionbs/ApplicationTest/servicesTest/RatingServiceTest.class
