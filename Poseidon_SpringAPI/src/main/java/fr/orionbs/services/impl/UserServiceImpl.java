@@ -40,6 +40,10 @@ public class UserServiceImpl implements UserService {
             log.info("User is empty");
             return false;
         }
+        if (userDTO.getId() != null) {
+            log.error("Warning Id {} isn't null.", userDTO.getId());
+            return false;
+        }
 
         userMapper = new UserMapper();
 

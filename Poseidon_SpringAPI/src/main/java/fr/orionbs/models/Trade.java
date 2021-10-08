@@ -10,11 +10,10 @@ import java.sql.Timestamp;
 @Builder
 @Getter
 @Setter
-@ToString
 @Entity(name = "trade")
 public class Trade {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String account;
     private String type;
@@ -36,4 +35,31 @@ public class Trade {
     private String dealType;
     private String sourceListId;
     private String side;
+
+    @Override
+    public String toString() {
+        return "Trade{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", type='" + type + '\'' +
+                ", buyQuantity=" + buyQuantity +
+                ", sellQuantity=" + sellQuantity +
+                ", buyPrice=" + buyPrice +
+                ", sellPrice=" + sellPrice +
+                ", benchmark='" + benchmark + '\'' +
+                ", tradeDate=" + tradeDate +
+                ", security='" + security + '\'' +
+                ", status='" + status + '\'' +
+                ", trader='" + trader + '\'' +
+                ", book='" + book + '\'' +
+                ", creationName='" + creationName + '\'' +
+                ", creationDate=" + creationDate +
+                ", revisionName='" + revisionName + '\'' +
+                ", revisionDate=" + revisionDate +
+                ", dealName='" + dealName + '\'' +
+                ", dealType='" + dealType + '\'' +
+                ", sourceListId='" + sourceListId + '\'' +
+                ", side='" + side + '\'' +
+                '}';
+    }
 }

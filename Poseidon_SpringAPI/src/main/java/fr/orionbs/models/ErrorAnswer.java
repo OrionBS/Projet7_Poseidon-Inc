@@ -7,8 +7,15 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-@ToString
 public class ErrorAnswer {
     private String errorCode;
     private String errorMessage;
+
+    @Override
+    public String toString() {
+        return "ErrorAnswer{" +
+                "errorCode='" + errorCode + '\'' +
+                ", errorMessage='" + errorMessage + '\'' +
+                '}';
+    }
 }

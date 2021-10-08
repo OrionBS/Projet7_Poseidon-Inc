@@ -33,6 +33,10 @@ public class TradeServiceImpl implements TradeService {
             log.info("Trade is empty");
             return false;
         }
+        if (tradeDTO.getId() != null) {
+            log.error("Warning Id {} isn't null.", tradeDTO.getId());
+            return false;
+        }
 
         tradeMapper = new TradeMapper();
 

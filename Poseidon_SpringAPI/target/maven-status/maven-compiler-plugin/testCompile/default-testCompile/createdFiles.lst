@@ -1,6 +1,15 @@
 fr/orionbs/ApplicationTest/servicesTest/CurvePointServiceTest.class
 fr/orionbs/ApplicationTest/servicesTest/UserServiceTest.class
+fr/orionbs/ApplicationTest/restControllersTest/HomeRestControllerTest.class
+fr/orionbs/ApplicationTest/restControllersTest/UserRestControllerTest.class
+fr/orionbs/ApplicationTest/SecurityConfigTest.class
 fr/orionbs/ApplicationTest/servicesTest/BidServiceTest.class
-fr/orionbs/ApplicationTest/servicesTest/TradeServiceTest.class
+fr/orionbs/ApplicationTest/restControllersTest/TradeRestControllerTest.class
+fr/orionbs/ApplicationTest/restControllersTest/BidRestControllerTest.class
+fr/orionbs/ApplicationTest/restControllersTest/RatingRestControllerTest.class
+fr/orionbs/ApplicationTest/restControllersTest/AuthenticateControllerTest.class
+fr/orionbs/ApplicationTest/restControllersTest/RuleRestControllerTest.class
 fr/orionbs/ApplicationTest/servicesTest/RuleServiceTest.class
 fr/orionbs/ApplicationTest/servicesTest/RatingServiceTest.class
+fr/orionbs/ApplicationTest/restControllersTest/CurvePointRestControllerTest.class
+fr/orionbs/ApplicationTest/servicesTest/TradeServiceTest.class

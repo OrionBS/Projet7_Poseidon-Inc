@@ -33,6 +33,10 @@ public class RatingServiceImpl implements RatingService {
             log.info("Rating is empty");
             return false;
         }
+        if (ratingDTO.getId() != null) {
+            log.error("Warning Id {} isn't null.", ratingDTO.getId());
+            return false;
+        }
         ratingMapper = new RatingMapper();
 
         log.info("Creating Rating, {}", ratingDTO);

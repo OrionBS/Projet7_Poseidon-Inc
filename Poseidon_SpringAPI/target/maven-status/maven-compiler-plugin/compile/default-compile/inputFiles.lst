@@ -17,7 +17,6 @@
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/security/JwtTokenUtil.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/models/ErrorAnswer.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/models/Bid.java
-/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/restControllers/LoginController.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/security/JwtAuthenticationEntryPoint.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/Application.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/main/java/fr/orionbs/dtos/UserDTO.java

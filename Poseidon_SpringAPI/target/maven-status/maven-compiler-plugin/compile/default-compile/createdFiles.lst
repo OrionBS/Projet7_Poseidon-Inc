@@ -54,7 +54,6 @@ fr/orionbs/restControllers/TradeRestController.class
 fr/orionbs/models/User$UserBuilder.class
 fr/orionbs/dtos/CredentialsDTO.class
 fr/orionbs/services/impl/CurvePointServiceImpl.class
-fr/orionbs/restControllers/LoginController.class
 fr/orionbs/models/Rating.class
 fr/orionbs/mappers/CurvePointMapper.class
 fr/orionbs/security/AuthenticationController.class

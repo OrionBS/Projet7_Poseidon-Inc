@@ -11,10 +11,19 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
-@ToString
 public class TradeDTO {
     private Integer id;
     private String account;
     private String type;
     private Double buyQuantity;
+
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\"id\": \""+id+"\",\n" +
+                "\"account\": \""+account+"\",\n" +
+                "\"type\": \""+type+"\",\n" +
+                "\"buyQuantity\": \""+buyQuantity+"\"\n" +
+                '}';
+    }
 }

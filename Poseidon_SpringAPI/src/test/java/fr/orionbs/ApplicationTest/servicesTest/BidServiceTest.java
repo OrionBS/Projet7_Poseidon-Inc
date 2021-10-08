@@ -32,9 +32,8 @@ public class BidServiceTest {
     @Test
     public void testCreatingBid() {
         //GIVEN
-        BidDTO bidDTO = new BidDTO(1, "AccountTest", "TypeTest", 10.0);
+        BidDTO bidDTO = new BidDTO(null,"AccountTest", "TypeTest", 10.0);
         Bid bid = new Bid();
-        bid.setId(1);
         bid.setAccount("AccountTest");
         bid.setType("TypeTest");
         bid.setBidQuantity(10.0);

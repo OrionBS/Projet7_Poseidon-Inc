@@ -33,6 +33,10 @@ public class RuleServiceImpl implements RuleService {
             log.info("Rule is empty");
             return false;
         }
+        if (ruleDTO.getId() != null) {
+            log.error("Warning Id {} isn't null.", ruleDTO.getId());
+            return false;
+        }
 
         ruleMapper = new RuleMapper();
 

@@ -32,9 +32,9 @@ public class RatingServiceTest {
     @Test
     public void testCreatingRating() {
         //GIVEN
-        RatingDTO ratingDTO = new RatingDTO(1,"MoodysTest","SAndPRatingTest","FitchTest",12);
+        RatingDTO ratingDTO = new RatingDTO(null,"MoodysTest","SAndPRatingTest","FitchTest",12);
         Rating rating = new Rating();
-        rating.setId(1);
+        rating.setId(null);
         rating.setMoodysRating("MoodysTest");
         rating.setSAndPRating("SAndPRatingTest");
         rating.setFitchRating("FitchTest");

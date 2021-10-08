@@ -11,7 +11,6 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
-@ToString
 public class RuleDTO {
     private Integer id;
     private String name;
@@ -21,29 +20,16 @@ public class RuleDTO {
     private String sqlStr;
     private String sqlPart;
 
-    public RuleDTO ruleToRuleDTO(Rule rule) {
-        return new RuleDTO(rule.getId(), rule.getName(), rule.getDescription(), rule.getJson(), rule.getTemplate(), rule.getSqlStr(), rule.getSqlPart());
-    }
-
-    public Rule ruleDtoToRule(RuleDTO ruleDTO) {
-        return Rule.builder().id(ruleDTO.getId()).name(ruleDTO.getName()).description(ruleDTO.getDescription()).json(ruleDTO.getJson()).template(ruleDTO.getTemplate()).sqlStr(ruleDTO.getSqlStr()).sqlPart(ruleDTO.getSqlPart()).build();
-    }
-
-    public List<RuleDTO> ruleToRuleDTOList(List<Rule> ruleList) {
-        List<RuleDTO> ruleDTOList = new ArrayList<>();
-        for (Rule rule : ruleList) {
-            RuleDTO ruleDTO = new RuleDTO(rule.getId(), rule.getName(), rule.getDescription(), rule.getJson(), rule.getTemplate(), rule.getSqlStr(), rule.getSqlPart());
-            ruleDTOList.add(ruleDTO);
-        }
-        return ruleDTOList;
-    }
-
-    public List<Rule> ruleDtoToRuleList(List<RuleDTO> ruleDTOList) {
-        List<Rule> ruleList = new ArrayList<>();
-        for (RuleDTO ruleDTO : ruleDTOList) {
-            Rule rule = Rule.builder().id(ruleDTO.getId()).name(ruleDTO.getName()).description(ruleDTO.getDescription()).json(ruleDTO.getJson()).template(ruleDTO.getTemplate()).sqlStr(ruleDTO.getSqlStr()).sqlPart(ruleDTO.getSqlPart()).build();
-            ruleList.add(rule);
-        }
-        return ruleList;
+    @Override
+    public String toString() {
+        return "{\n" +
+                "\"id\": \""+id+"\",\n" +
+                "\"name\": \""+name+"\",\n" +
+                "\"description\": \""+description+"\",\n" +
+                "\"json\": \""+json+"\",\n" +
+                "\"template\": \""+template+"\",\n" +
+                "\"sqlStr\": \""+sqlStr+"\",\n" +
+                "\"sqlPart\": \""+sqlPart+"\"\n" +
+                '}';
     }
 }

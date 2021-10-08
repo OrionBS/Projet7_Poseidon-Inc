@@ -1,5 +1,6 @@
 package fr.orionbs.services.impl;
 
+import com.sun.istack.NotNull;
 import fr.orionbs.dtos.BidDTO;
 import fr.orionbs.mappers.BidMapper;
 import fr.orionbs.models.Bid;
@@ -26,14 +27,18 @@ public class BidServiceImpl implements BidService {
     }
 
     @Override
-    public boolean creatingBid(BidDTO bidDTO) {
+    public boolean creatingBid(@NotNull BidDTO bidDTO) {
         if (bidDTO == null) {
-            log.info("Bid's empty");
+            log.error("Bid's empty");
+            return false;
+        }
+        if (bidDTO.getId() != null) {
+            log.error("Warning Id {} isn't null.", bidDTO.getId());
             return false;
         }
         bidMapper = new BidMapper();
 
-        log.info("Receiving BidDTO, {}", bidDTO);
+        log.debug("Receiving BidDTO, {}", bidDTO);
         Bid bid = bidMapper.bidDtoToBid(bidDTO);
         log.info("Creating Bid, {}", bid);
         bidRepository.save(bid);
@@ -70,7 +75,7 @@ public class BidServiceImpl implements BidService {
         Optional<Bid> isBidPresent = bidRepository.findById(bidDTO.getId());
 
         if (isBidPresent == null) {
-            log.info("Bid doesn't exist");
+            log.error("Bid doesn't exist");
             return false;
         }
 

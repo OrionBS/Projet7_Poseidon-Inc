@@ -32,9 +32,9 @@ public class TradeServiceTest {
     @Test
     public void testCreatingTrade() {
         //GIVEN
-        TradeDTO tradeDTO = new TradeDTO(1, "AccountTest", "TypeTest", 10.0);
+        TradeDTO tradeDTO = new TradeDTO(null, "AccountTest", "TypeTest", 10.0);
         Trade trade = new Trade();
-        trade.setId(1);
+        trade.setId(null);
         trade.setAccount("AccountTest");
         trade.setType("TypeTest");
         trade.setBuyQuantity(10.0);

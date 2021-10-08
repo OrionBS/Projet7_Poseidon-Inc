@@ -32,9 +32,9 @@ public class RuleServiceTest {
     @Test
     public void testCreatingRule() {
         //GIVEN
-        RuleDTO ruleDTO = new RuleDTO(1, "NameTest", "DescTest", "JsonTest","TemplateTest","SqlTest","SqlPartTest");
+        RuleDTO ruleDTO = new RuleDTO(null, "NameTest", "DescTest", "JsonTest","TemplateTest","SqlTest","SqlPartTest");
         Rule rule = new Rule();
-        rule.setId(1);
+        rule.setId(null);
         rule.setName("NameTest");
         rule.setDescription("DescTest");
         rule.setJson("JsonTest");

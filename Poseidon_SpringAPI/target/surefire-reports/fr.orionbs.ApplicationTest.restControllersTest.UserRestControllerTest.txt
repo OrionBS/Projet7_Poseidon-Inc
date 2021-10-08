@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: fr.orionbs.ApplicationTest.restControllersTest.UserRestControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.047 s <<< FAILURE! - in fr.orionbs.ApplicationTest.restControllersTest.UserRestControllerTest
+testReadingUser  Time elapsed: 0.028 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is javax.persistence.EntityNotFoundException: Unable to find fr.orionbs.models.User with id 2
+	at fr.orionbs.ApplicationTest.restControllersTest.UserRestControllerTest.testReadingUser(UserRestControllerTest.java:63)
+Caused by: javax.persistence.EntityNotFoundException: Unable to find fr.orionbs.models.User with id 2
+	at fr.orionbs.ApplicationTest.restControllersTest.UserRestControllerTest.testReadingUser(UserRestControllerTest.java:63)
+
+testDeletingUser  Time elapsed: 0 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.EmptyResultDataAccessException: No class fr.orionbs.models.User entity with id 1 exists!
+	at fr.orionbs.ApplicationTest.restControllersTest.UserRestControllerTest.testDeletingUser(UserRestControllerTest.java:75)
+Caused by: org.springframework.dao.EmptyResultDataAccessException: No class fr.orionbs.models.User entity with id 1 exists!
+	at fr.orionbs.ApplicationTest.restControllersTest.UserRestControllerTest.testDeletingUser(UserRestControllerTest.java:75)
+

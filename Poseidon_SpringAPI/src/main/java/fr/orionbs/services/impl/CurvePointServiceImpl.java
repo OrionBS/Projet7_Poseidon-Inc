@@ -34,6 +34,10 @@ public class CurvePointServiceImpl implements CurvePointService {
             log.info("CurvePoint is empty");
             return false;
         }
+        if (curvePointDTO.getId() != null) {
+            log.error("Warning Id {} isn't null.", curvePointDTO.getId());
+            return false;
+        }
 
         curvePointMapper = new CurvePointMapper();
 

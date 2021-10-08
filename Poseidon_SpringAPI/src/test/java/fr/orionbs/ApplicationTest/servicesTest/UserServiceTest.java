@@ -32,9 +32,9 @@ public class UserServiceTest {
     @Test
     public void testCreatingUser() {
         //GIVEN
-        UserDTO userDTO = new UserDTO(1, "UsernameTest", "FullNameTest", "RoleTest");
+        UserDTO userDTO = new UserDTO(null, "UsernameTest", "FullNameTest", "RoleTest");
         User user = new User();
-        user.setId(1);
+        user.setId(null);
         user.setUsername("UsernameTest");
         user.setFullName("FullNameTest");
         user.setRole("RoleTest");

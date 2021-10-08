@@ -32,9 +32,9 @@ public class CurvePointServiceTest {
     @Test
     public void testCreatingCurvePoint() {
         //GIVEN
-        CurvePointDTO curvePointDTO = new CurvePointDTO(1, 1, 12.0, 10.0);
+        CurvePointDTO curvePointDTO = new CurvePointDTO(null, 1, 12.0, 10.0);
         CurvePoint curvePoint = new CurvePoint();
-        curvePoint.setId(1);
+        curvePoint.setId(null);
         curvePoint.setCurveId(1);
         curvePoint.setTerm(12.0);
         curvePoint.setValue(10.0);

@@ -9,11 +9,10 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@ToString
 @Entity(name = "rule")
 public class Rule {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private String description;
@@ -21,4 +20,17 @@ public class Rule {
     private String template;
     private String sqlStr;
     private String sqlPart;
+
+    @Override
+    public String toString() {
+        return "Rule{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", json='" + json + '\'' +
+                ", template='" + template + '\'' +
+                ", sqlStr='" + sqlStr + '\'' +
+                ", sqlPart='" + sqlPart + '\'' +
+                '}';
+    }
 }

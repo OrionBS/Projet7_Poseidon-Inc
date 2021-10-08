@@ -45,9 +45,9 @@ public class CredentialsDTO {
 
     @Override
     public String toString() {
-        return "CredentialsDTO{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+        return "{" +
+                "\"username\":\"" + username + '\"' +
+                ", \"password\":\"" + password + '\"' +
                 '}';
     }
 }

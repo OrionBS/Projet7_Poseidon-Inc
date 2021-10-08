@@ -1,6 +1,15 @@
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/TradeRestControllerTest.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/TradeServiceTest.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/CurvePointServiceTest.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/RatingServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/RatingRestControllerTest.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/RuleServiceTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/HomeRestControllerTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/CurvePointRestControllerTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/SecurityConfigTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/UserRestControllerTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/AuthenticateControllerTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/BidRestControllerTest.java
+/home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/restControllersTest/RuleRestControllerTest.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/BidServiceTest.java
 /home/orionbs/Documents/OCR/Projet7_Poseidon-Inc/Poseidon_SpringAPI/src/test/java/fr/orionbs/ApplicationTest/servicesTest/UserServiceTest.java

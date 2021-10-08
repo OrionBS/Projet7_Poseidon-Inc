@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: fr.orionbs.ApplicationTest.restControllersTest.RatingRestControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.066 s <<< FAILURE! - in fr.orionbs.ApplicationTest.restControllersTest.RatingRestControllerTest
+testReadingRating  Time elapsed: 0.026 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is javax.persistence.EntityNotFoundException: Unable to find fr.orionbs.models.Rating with id 2
+	at fr.orionbs.ApplicationTest.restControllersTest.RatingRestControllerTest.testReadingRating(RatingRestControllerTest.java:63)
+Caused by: javax.persistence.EntityNotFoundException: Unable to find fr.orionbs.models.Rating with id 2
+	at fr.orionbs.ApplicationTest.restControllersTest.RatingRestControllerTest.testReadingRating(RatingRestControllerTest.java:63)
+
+testDeletingRating  Time elapsed: 0.001 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.dao.EmptyResultDataAccessException: No class fr.orionbs.models.Rating entity with id 1 exists!
+	at fr.orionbs.ApplicationTest.restControllersTest.RatingRestControllerTest.testDeletingRating(RatingRestControllerTest.java:75)
+Caused by: org.springframework.dao.EmptyResultDataAccessException: No class fr.orionbs.models.Rating entity with id 1 exists!
+	at fr.orionbs.ApplicationTest.restControllersTest.RatingRestControllerTest.testDeletingRating(RatingRestControllerTest.java:75)
+
