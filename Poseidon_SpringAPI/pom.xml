@@ -166,6 +166,8 @@
 					</dependency>
 				</dependencies>
 				<configuration>
+					<parallel>classes</parallel>
+					<threadCount>1</threadCount>
 					<excludes>
 						<exclude>**/*IT.java</exclude>
 					</excludes>

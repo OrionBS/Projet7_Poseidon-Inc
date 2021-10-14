@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RuleServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projet7_Poseidon-SpringAPI</a> &gt; <a href="index.source.html" class="el_package">fr.orionbs.services.impl</a> &gt; <span class="el_source">RuleServiceImpl.java</span></div><h1>RuleServiceImpl.java</h1><pre class="source lang-java linenums">package fr.orionbs.services.impl;
+
+import fr.orionbs.dtos.RuleDTO;
+import fr.orionbs.mappers.RuleMapper;
+import fr.orionbs.mappers.RuleMapper;
+import fr.orionbs.models.Rule;
+import fr.orionbs.models.Rule;
+import fr.orionbs.repositories.RuleRepository;
+import fr.orionbs.services.RuleService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L18">@Slf4j</span>
+@Transactional
+public class RuleServiceImpl implements RuleService {
+
+    private final RuleRepository ruleRepository;
+    private RuleMapper ruleMapper;
+
+<span class="fc" id="L25">    public RuleServiceImpl(RuleRepository ruleRepository, RuleMapper ruleMapper) {</span>
+<span class="fc" id="L26">        this.ruleRepository = ruleRepository;</span>
+<span class="fc" id="L27">        this.ruleMapper = ruleMapper;</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    public boolean creatingRule(RuleDTO ruleDTO) {
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (ruleDTO == null) {</span>
+<span class="fc" id="L33">            log.info(&quot;Rule is empty&quot;);</span>
+<span class="fc" id="L34">            return false;</span>
+        }
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (ruleDTO.getId() != null) {</span>
+<span class="fc" id="L37">            log.error(&quot;Warning Id {} isn't null.&quot;, ruleDTO.getId());</span>
+<span class="fc" id="L38">            return false;</span>
+        }
+
+<span class="fc" id="L41">        ruleMapper = new RuleMapper();</span>
+
+<span class="fc" id="L43">        log.info(&quot;Creating Rule, {}&quot;, ruleDTO);</span>
+<span class="fc" id="L44">        ruleRepository.save(ruleMapper.ruleDtoToRule(ruleDTO));</span>
+<span class="fc" id="L45">        return true;</span>
+    }
+
+    @Override
+    public RuleDTO readingRule(Integer index) {
+<span class="fc" id="L50">        log.info(&quot;Reading Rule Id {}&quot;, index);</span>
+<span class="fc" id="L51">        Rule rule = ruleRepository.getById(index);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if(rule == null) {</span>
+<span class="fc" id="L53">            log.warn(&quot;Not found Rule Id {}&quot;, index);</span>
+<span class="fc" id="L54">            return null;</span>
+        }
+<span class="fc" id="L56">        log.info(&quot;Rule found {}&quot;, rule);</span>
+<span class="fc" id="L57">        ruleMapper = new RuleMapper();</span>
+<span class="fc" id="L58">        return ruleMapper.ruleToRuleDTO(rule);</span>
+    }
+
+    @Override
+    public List&lt;RuleDTO&gt; readingAllRule() {
+<span class="fc" id="L63">        log.info(&quot;Reading All Rules&quot;);</span>
+<span class="fc" id="L64">        ruleMapper = new RuleMapper();</span>
+<span class="fc" id="L65">        return ruleMapper.ruleToRuleDTOList(ruleRepository.findAll());</span>
+    }
+
+    @Override
+    public boolean updatingRule(RuleDTO ruleDTO) {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (ruleDTO == null) {</span>
+<span class="fc" id="L71">            log.info(&quot;Rule is empty&quot;);</span>
+<span class="fc" id="L72">            return false;</span>
+        }
+
+<span class="fc" id="L75">        Optional&lt;Rule&gt; isRulePresent = ruleRepository.findById(ruleDTO.getId());</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (isRulePresent == null) {</span>
+<span class="fc" id="L78">            log.info(&quot;Rule doesn't exist&quot;);</span>
+<span class="fc" id="L79">            return false;</span>
+        }
+
+<span class="fc" id="L82">        Rule oldRule = isRulePresent.get();</span>
+
+<span class="fc" id="L84">        ruleMapper = new RuleMapper();</span>
+<span class="fc" id="L85">        Rule rule = ruleMapper.ruleDtoToRule(ruleDTO);</span>
+
+<span class="fc" id="L87">        oldRule.setName(rule.getName());</span>
+<span class="fc" id="L88">        oldRule.setDescription(rule.getDescription());</span>
+<span class="fc" id="L89">        oldRule.setJson(rule.getJson());</span>
+<span class="fc" id="L90">        oldRule.setTemplate(rule.getTemplate());</span>
+<span class="fc" id="L91">        oldRule.setSqlStr(rule.getSqlStr());</span>
+<span class="fc" id="L92">        oldRule.setSqlPart(rule.getSqlPart());</span>
+
+<span class="fc" id="L94">        log.info(&quot;Updating Rule, {}&quot;, oldRule);</span>
+<span class="fc" id="L95">        ruleRepository.save(oldRule);</span>
+<span class="fc" id="L96">        return true;</span>
+    }
+
+    @Override
+    public boolean deletingRule(Integer index) {
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (ruleRepository.findById(index) == null) {</span>
+<span class="fc" id="L102">            log.info(&quot;Rule doesn't exist&quot;);</span>
+<span class="fc" id="L103">            return false;</span>
+        }
+<span class="fc" id="L105">        ruleRepository.deleteById(index);</span>
+<span class="fc" id="L106">        log.info(&quot;Deleting Rule {}&quot;, index);</span>
+<span class="fc" id="L107">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
