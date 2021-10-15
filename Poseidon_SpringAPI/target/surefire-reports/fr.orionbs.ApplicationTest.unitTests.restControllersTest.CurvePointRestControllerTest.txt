@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fr.orionbs.ApplicationTest.unitTests.restControllersTest.CurvePointRestControllerTest
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.131 s - in fr.orionbs.ApplicationTest.unitTests.restControllersTest.CurvePointRestControllerTest

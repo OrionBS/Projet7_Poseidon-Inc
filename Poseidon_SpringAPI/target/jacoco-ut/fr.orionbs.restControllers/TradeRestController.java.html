@@ -24,8 +24,8 @@ public class TradeRestController {
 
 <span class="fc" id="L25">        boolean answer = tradeService.creatingTrade(tradeDTO);</span>
 
-<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (answer) {</span>
-<span class="nc" id="L28">            return new ResponseEntity&lt;&gt;(true, HttpStatus.CREATED);</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if (answer) {</span>
+<span class="fc" id="L28">            return new ResponseEntity&lt;&gt;(true, HttpStatus.CREATED);</span>
         }
 <span class="fc" id="L30">        return new ResponseEntity&lt;&gt;(false, HttpStatus.BAD_REQUEST);</span>
     }
@@ -33,12 +33,12 @@ public class TradeRestController {
     @GetMapping(path = &quot;/{index}&quot;)
     public ResponseEntity&lt;TradeDTO&gt; readingTrade(@PathVariable(value = &quot;index&quot;) Integer index) {
 
-<span class="nc" id="L36">        TradeDTO tradeDTO = tradeService.readingTrade(index);</span>
+<span class="fc" id="L36">        TradeDTO tradeDTO = tradeService.readingTrade(index);</span>
 
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (tradeDTO == null) {</span>
-<span class="nc" id="L39">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (tradeDTO == null) {</span>
+<span class="fc" id="L39">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
         }
-<span class="nc" id="L41">        return new ResponseEntity&lt;&gt;(tradeDTO, HttpStatus.OK);</span>
+<span class="fc" id="L41">        return new ResponseEntity&lt;&gt;(tradeDTO, HttpStatus.OK);</span>
     }
 
     @GetMapping
@@ -52,23 +52,23 @@ public class TradeRestController {
     @PutMapping
     public ResponseEntity&lt;Boolean&gt; updatingTrade(@RequestBody TradeDTO tradeDTO) {
 
-<span class="nc" id="L55">        boolean answer = tradeService.updatingTrade(tradeDTO);</span>
+<span class="fc" id="L55">        boolean answer = tradeService.updatingTrade(tradeDTO);</span>
 
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (answer) {</span>
-<span class="nc" id="L58">            return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (answer) {</span>
+<span class="fc" id="L58">            return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
         }
-<span class="nc" id="L60">        return new ResponseEntity&lt;&gt;(false, HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L60">        return new ResponseEntity&lt;&gt;(false, HttpStatus.NOT_FOUND);</span>
     }
 
     @DeleteMapping
     public ResponseEntity&lt;Boolean&gt; deletingTrade(@RequestParam(value = &quot;index&quot;) Integer index) {
 
-<span class="nc" id="L66">        boolean answer = tradeService.deletingTrade(index);</span>
+<span class="fc" id="L66">        boolean answer = tradeService.deletingTrade(index);</span>
 
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (answer) {</span>
-<span class="nc" id="L69">            return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (answer) {</span>
+<span class="fc" id="L69">            return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
         }
-<span class="nc" id="L71">        return new ResponseEntity&lt;&gt;(false, HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L71">        return new ResponseEntity&lt;&gt;(false, HttpStatus.NOT_FOUND);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

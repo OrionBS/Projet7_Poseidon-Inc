@@ -1,11 +1,11 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,RatingRestController,60,37,6,2,12,9,6,4,3,3
+Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,RatingRestController,0,97,0,8,0,21,0,10,0,6
 Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,ErrorHandlingRestController,7,3,0,0,1,1,1,1,1,1
-Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,TradeRestController,67,30,7,1,13,8,7,3,3,3
-Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,CurvePointRestController,60,37,6,2,12,9,6,4,3,3
-Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,UserRestController,67,30,7,1,13,8,7,3,3,3
-Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,BidRestController,60,37,6,2,12,9,6,4,3,3
-Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,RuleRestController,60,37,6,2,12,9,6,4,3,3
+Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,TradeRestController,0,97,0,8,0,21,0,10,0,6
+Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,CurvePointRestController,0,97,0,8,0,21,0,10,0,6
+Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,UserRestController,0,97,0,8,0,21,0,10,0,6
+Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,BidRestController,0,97,0,8,0,21,0,10,0,6
+Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,RuleRestController,0,97,0,8,0,21,0,10,0,6
 Projet7_Poseidon-SpringAPI,fr.orionbs.restControllers,HomeRestController,0,5,0,0,0,2,0,2,0,2
 Projet7_Poseidon-SpringAPI,fr.orionbs.services.impl,BidServiceImpl,0,179,0,12,0,50,0,13,0,7
 Projet7_Poseidon-SpringAPI,fr.orionbs.services.impl,TradeServiceImpl,0,173,0,12,0,48,0,13,0,7

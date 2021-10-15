@@ -1,5 +1,6 @@
 package fr.orionbs.services.impl;
 
+import com.sun.istack.NotNull;
 import fr.orionbs.dtos.CredentialsDTO;
 import fr.orionbs.dtos.TokenDTO;
 import fr.orionbs.dtos.UserDTO;
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public boolean creatingUser(UserDTO userDTO) {
+    public boolean creatingUser(@NotNull UserDTO userDTO) {
         if (userDTO == null) {
             log.info("User is empty");
             return false;
