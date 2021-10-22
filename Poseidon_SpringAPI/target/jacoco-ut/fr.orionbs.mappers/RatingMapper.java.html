@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingMapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projet7_Poseidon-SpringAPI</a> &gt; <a href="index.source.html" class="el_package">fr.orionbs.mappers</a> &gt; <span class="el_source">RatingMapper.java</span></div><h1>RatingMapper.java</h1><pre class="source lang-java linenums">package fr.orionbs.mappers;
+
+import fr.orionbs.dtos.RatingDTO;
+import fr.orionbs.models.Rating;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Component
+<span class="fc" id="L11">public class RatingMapper {</span>
+
+    public RatingDTO ratingToRatingDTO(Rating rating) {
+<span class="fc" id="L14">        RatingDTO ratingDTO = new RatingDTO(rating.getId(), rating.getMoodysRating(), rating.getSAndPRating(), rating.getFitchRating(), rating.getOrderNumber());</span>
+<span class="fc" id="L15">        return ratingDTO;</span>
+    }
+
+    public Rating ratingDtoToRating(RatingDTO ratingDTO) {
+<span class="fc" id="L19">        Rating rating = new Rating();</span>
+<span class="fc" id="L20">        rating.setId(ratingDTO.getId());</span>
+<span class="fc" id="L21">        rating.setMoodysRating(ratingDTO.getMoodysRating());</span>
+<span class="fc" id="L22">        rating.setSAndPRating(ratingDTO.getSAndPRating());</span>
+<span class="fc" id="L23">        rating.setFitchRating(ratingDTO.getFitchRating());</span>
+<span class="fc" id="L24">        rating.setOrderNumber(ratingDTO.getOrderNumber());</span>
+<span class="fc" id="L25">        return rating;</span>
+    }
+
+    public List&lt;RatingDTO&gt; ratingToRatingDTOList(List&lt;Rating&gt; ratingList) {
+<span class="fc" id="L29">        List&lt;RatingDTO&gt; ratingDTOList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (Rating rating : ratingList) {</span>
+<span class="fc" id="L31">            RatingDTO ratingDTO = ratingToRatingDTO(rating);</span>
+<span class="fc" id="L32">            ratingDTOList.add(ratingDTO);</span>
+<span class="fc" id="L33">        }</span>
+<span class="fc" id="L34">        return ratingDTOList;</span>
+    }
+
+    public List&lt;Rating&gt; ratingDtoToRatingList(List&lt;RatingDTO&gt; ratingDTOList) {
+<span class="nc" id="L38">        List&lt;Rating&gt; ratingList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        for (RatingDTO ratingDTO : ratingDTOList) {</span>
+<span class="nc" id="L40">            Rating rating = ratingDtoToRating(ratingDTO);</span>
+<span class="nc" id="L41">            ratingList.add(rating);</span>
+<span class="nc" id="L42">        }</span>
+<span class="nc" id="L43">        return ratingList;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

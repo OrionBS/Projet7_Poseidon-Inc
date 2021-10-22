@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RatingDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projet7_Poseidon-SpringAPI</a> &gt; <a href="index.source.html" class="el_package">fr.orionbs.dtos</a> &gt; <span class="el_source">RatingDTO.java</span></div><h1>RatingDTO.java</h1><pre class="source lang-java linenums">package fr.orionbs.dtos;
+
+import lombok.*;
+
+<span class="fc" id="L5">@AllArgsConstructor</span>
+<span class="fc" id="L6">@NoArgsConstructor</span>
+<span class="nc" id="L7">@Builder</span>
+<span class="pc" id="L8">@Setter</span>
+@Getter
+public class RatingDTO {
+<span class="fc" id="L11">    private Integer id;</span>
+<span class="fc" id="L12">    private String moodysRating;</span>
+<span class="fc" id="L13">    private String sAndPRating;</span>
+<span class="fc" id="L14">    private String fitchRating;</span>
+<span class="fc" id="L15">    private Integer orderNumber;</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L19">        return &quot;{\n&quot; +</span>
+                &quot;\&quot;id\&quot;: \&quot;&quot;+id+&quot;\&quot;,\n&quot; +
+                &quot;\&quot;moodysRating\&quot;: \&quot;&quot;+id+&quot;\&quot;,\n&quot; +
+                &quot;\&quot;sAndPRating\&quot;: \&quot;&quot;+sAndPRating+&quot;\&quot;,\n&quot; +
+                &quot;\&quot;fitchRating\&quot;: \&quot;&quot;+fitchRating+&quot;\&quot;,\n&quot; +
+                &quot;\&quot;orderNumber\&quot;: \&quot;&quot;+orderNumber+&quot;\&quot;\n&quot; +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

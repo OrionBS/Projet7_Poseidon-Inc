@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminInitImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projet7_Poseidon-SpringAPI</a> &gt; <a href="index.source.html" class="el_package">fr.orionbs.services.impl</a> &gt; <span class="el_source">AdminInitImpl.java</span></div><h1>AdminInitImpl.java</h1><pre class="source lang-java linenums">package fr.orionbs.services.impl;
+
+import fr.orionbs.models.User;
+import fr.orionbs.repositories.UserRepository;
+import fr.orionbs.services.AdminInit;
+import fr.orionbs.services.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+
+<span class="fc" id="L13">@Slf4j</span>
+@Service
+public class AdminInitImpl implements AdminInit {
+
+    private final UserRepository userRepository;
+
+<span class="fc" id="L19">    public AdminInitImpl(UserRepository userRepository) {</span>
+<span class="fc" id="L20">        this.userRepository = userRepository;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    @PostConstruct
+    public void postContruct() {
+<span class="fc" id="L26">        User isPresent = userRepository.findByUsername(&quot;admin&quot;);</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (isPresent == null) {</span>
+<span class="fc" id="L28">            log.info(&quot;Admin added&quot;);</span>
+<span class="fc" id="L29">            User admin = new User(null, &quot;admin&quot;, new BCryptPasswordEncoder().encode(&quot;adminPassword&quot;), &quot;Admin&quot;, &quot;ADMIN&quot;);</span>
+<span class="fc" id="L30">            userRepository.save(admin);</span>
+<span class="fc" id="L31">        } else {</span>
+<span class="nc" id="L32">            log.info(&quot;Admin already present.&quot;);</span>
+        }
+<span class="fc" id="L34">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
