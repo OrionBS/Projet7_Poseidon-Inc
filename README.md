@@ -62,11 +62,14 @@ npm start
 
 ## Web
 
+```
 Un admin par défaut a été créé:
 username: admin
 password: adminPassword
 
 http://localhost:4200
+```
+
 
 ## Fabriqué avec
 
